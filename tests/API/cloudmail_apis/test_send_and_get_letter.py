@@ -1,0 +1,173 @@
+"""
+End-to-end letter flows.
+
+Two hardcoded payloads, two tests. Each test POSTs its payload, captures
+the returned letter_uuid, then hits the details and status GET endpoints.
+
+  - test_firstclass_letter_flow  -> PAYLOAD_FIRSTCLASS (mail_type="firstclass", amount=1.50)
+  - test_certified_letter_flow   -> PAYLOAD_CERTIFIED  (mail_type="certified",  amount=6.64)
+
+Self-contained: payloads, helpers, and both tests are all in this file.
+"""
+
+POST_LETTER_URL = "http://qa-cloudmail-letters.internal.creditrepaircloud.com/api/letter"
+GET_LETTER_URL = "http://qa-cloudmail.internal.creditrepaircloud.com//api/letter/details"
+GET_LETTER_STATUS_URL = "http://qa-cloudmail.internal.creditrepaircloud.com//api/letter/status"
+
+
+# ──────────────────────────────────────────────────────────
+# Letter body (HTML w/ embedded base64 signature). Pulled out
+# as a constant so the two hardcoded payloads below don't each
+# carry an 8 KB duplicate.
+# ──────────────────────────────────────────────────────────
+LETTER_BODY = (
+    "<p>API Send Letter<br/>,  <br>Date of Birth: <br>SS#: </p>"
+    "<p>Experian<br />\nP.O. Box 4500<br />\nAllen, TX 75013</p>"
+    "<p>04/26/2026</p>"
+    "<p>Re: Letter to Remove Inaccurate Credit Information</p>"
+    "<p>To Whom It May Concern:</p><p><br></p>"
+    "<p data-pasted=\"true\">I received a copy of my credit report and "
+    "found the following item(s) to be in error:</p>"
+    "<p>1. The following account is not mine<br/>"
+    "&nbsp;&nbsp;&nbsp;&nbsp;<br/>"
+    "&nbsp;&nbsp;&nbsp;&nbsp;Account Number: <br/>"
+    "&nbsp;&nbsp;&nbsp;&nbsp;Please remove it from my credit report.<br/><br/></p>"
+    "<p>By the provisions of the Fair Credit Reporting Act, I demand that these "
+    "items be investigated and removed from my report. It is my understanding "
+    "that you will recheck these items with the creditor who has posted them. "
+    "Please remove any information that the creditor cannot verify. I understand "
+    "that under 15 U.S.C. Sec. 1681i(a), you must complete this reinvestigation "
+    "within 30 days of receipt of this letter.</p><p><br></p>"
+    "<p>Please send an updated copy of my credit report to the above address. "
+    "According to the act, there shall be no charge for this updated report. "
+    "I also request that you please send notices of corrections to anyone who "
+    "received my credit report in the past six months.</p>"
+    "<p>Thank you for your time and help in this matter.</p>"
+    "<p>Sincerely,</p>"
+    "<p><img src=\"data:image/png;base64,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\"><br>"
+    "_____________________________________<br>API Send Letter</p>"
+)
+
+
+# ──────────────────────────────────────────────────────────
+# Hardcoded payload — FIRSTCLASS flow
+# ──────────────────────────────────────────────────────────
+PAYLOAD_FIRSTCLASS = {
+    "registration_id": 1001584,
+    "client_id": 290,
+    "from_address": {
+        "name": "John Doe",
+        "primary_line": "123 Main Street",
+        "secondary_line": "Suite 100",
+        "state": "Florida",
+    },
+    "to_address": {
+        "name": "Equifax Information Services",
+        "primary_line": "456 Oak Avenue",
+        "secondary_line": None,
+        "city": "Orlando",
+        "state": "Florida",
+        "zip_code": "32801",
+    },
+    "letter_body": LETTER_BODY,
+    "color": False,
+    "amount": 1.50,
+    "mail_type": "firstclass",
+    "wallet_type": "cloudmail",
+    "double_sided": False,
+    "return_envelope": False,
+}
+
+
+# ──────────────────────────────────────────────────────────
+# Hardcoded payload — CERTIFIED flow
+# ──────────────────────────────────────────────────────────
+PAYLOAD_CERTIFIED = {
+    "registration_id": 1001584,
+    "client_id": 290,
+    "from_address": {
+        "name": "John Doe",
+        "primary_line": "123 Main Street",
+        "secondary_line": "Suite 100",
+        "state": "Florida",
+    },
+    "to_address": {
+        "name": "Equifax Information Services",
+        "primary_line": "456 Oak Avenue",
+        "secondary_line": None,
+        "city": "Orlando",
+        "state": "Florida",
+        "zip_code": "32801",
+    },
+    "letter_body": LETTER_BODY,
+    "color": False,
+    "amount": 6.64,
+    "mail_type": "certified",
+    "wallet_type": "cloudmail",
+    "double_sided": False,
+    "return_envelope": False,
+}
+
+
+# ──────────────────────────────────────────────────────────
+# Helpers
+# ──────────────────────────────────────────────────────────
+def _post_letter(request_context, payload):
+    mail_type = payload.get("mail_type")
+    response = request_context.post(POST_LETTER_URL, data=payload)
+    print(f"\nPOST URL    : {POST_LETTER_URL}")
+    print(f"POST Variant: mail_type={mail_type}, amount={payload.get('amount')}")
+    print(f"POST Status : {response.status} {response.status_text}")
+    print(f"POST Body   : {response.text()}")
+
+    assert response.ok, f"POST failed: {response.status} {response.status_text}"
+
+    body = response.json()
+    assert body.get("status") == "success", f"POST returned non-success: {body}"
+
+    data = body.get("data") or {}
+    letter_uuid = data.get("letter_uuid")
+    tracking_number = data.get("tracking_number")
+
+    assert letter_uuid, f"Expected non-empty letter_uuid, got {letter_uuid!r}"
+
+    if mail_type == "certified":
+        assert tracking_number is not None and str(tracking_number).strip() != "", (
+            f"Expected non-null tracking_number for mail_type='certified', "
+            f"got {tracking_number!r}"
+        )
+
+    print(f"Captured letter_uuid: {letter_uuid}")
+    return letter_uuid
+
+
+def _get(request_context, url):
+    response = request_context.get(url)
+    print(f"\nGET URL    : {url}")
+    print(f"GET Status : {response.status} {response.status_text}")
+    print(f"GET Body   : {response.text()}")
+
+    assert response.ok, f"GET failed: {response.status} {response.status_text}"
+
+    body = response.json()
+    assert body.get("status") == "success", f"GET returned non-success: {body}"
+
+
+# ══════════════════════════════════════════════════════════
+# Flow 1 — FIRSTCLASS: POST + GET details + GET status
+# ══════════════════════════════════════════════════════════
+def test_firstclass_letter_flow(request_context):
+    """POST a firstclass letter, then GET its details and status."""
+    letter_uuid = _post_letter(request_context, PAYLOAD_FIRSTCLASS)
+    _get(request_context, f"{GET_LETTER_URL}/{letter_uuid}")
+    _get(request_context, f"{GET_LETTER_STATUS_URL}/{letter_uuid}")
+
+
+# ══════════════════════════════════════════════════════════
+# Flow 2 — CERTIFIED: POST + GET details + GET status
+# ══════════════════════════════════════════════════════════
+def test_certified_letter_flow(request_context):
+    """POST a certified letter, then GET its details and status."""
+    letter_uuid = _post_letter(request_context, PAYLOAD_CERTIFIED)
+    _get(request_context, f"{GET_LETTER_URL}/{letter_uuid}")
+    _get(request_context, f"{GET_LETTER_STATUS_URL}/{letter_uuid}")

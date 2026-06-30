@@ -1,0 +1,6 @@
+first_name,middle_name,last_name,suffix,email,date_of_birth,status,ssn,phone,address,secondary_address,city,state,zip,previous_address,previous_secondary_address,previous_city,previous_state,previous_zip,mobile,start_date,added_date,work,phone_ext,fax,country,previous_country,country_code,referred_by,affiliate_compmany,assigned_to,memo
+client,,one,,cclien1@yopmail.com,,Client,,,,,,,,,,,,,,04/10/2026,04/10/2026,,,,United States,United States,224, ,,Test personal,""
+client,,two,,cclien2@yopmail.com,,Client,,,,,,,,,,,,,,04/10/2026,04/10/2026,,,,United States,United States,224, ,,Test personal,""
+Client,,Three,,cclien3@yopmail.com,,Client,,,,,,,,,,,,,,04/10/2026,04/10/2026,,,,United States,United States,224, ,,Test personal,""
+Sample,,Client,,sample@client.com,02/14/1963,Client,1111,(310) 111-1111, 1234 Main Street,,Santa Monica,California,90401,,,,,,(310) 333-3333,01/02/2013,04/09/2026,(310) 222-2222,,(310) 444-4444,United States,United States,224,Sample Affiliate,ABC Mortgage,Test personal,"Click to add 'notes to yourself' not seen by clients."
+Sample,,Lead,,sample@lead.com,01/01/1975,Lead,1111,(310) 111-1111, 1234 Main Street,,Santa Monica,California,90401,,,,,,(310) 333-3333,01/02/2013,04/09/2026,(310) 222-2222,,(310) 444-4444,United States,United States,224,Sample Affiliate,ABC Mortgage,,"Click to add 'notes to yourself' not seen by clients."

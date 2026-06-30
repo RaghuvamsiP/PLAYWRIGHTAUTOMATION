@@ -1,0 +1,8 @@
+playwright
+pytest
+pytest-playwright
+requests
+faker
+allure-pytest
+pytest-xdist
+pytest-repeat
