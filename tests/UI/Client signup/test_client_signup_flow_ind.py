@@ -29,7 +29,7 @@ PORTAL_PASSWORD = "Test@1234"
 FIRST_NAME = "IND"
 
 # Deep-link FREE checkout URL (no payment); bypasses /start and plan selection.
-DIRECT_CHECKOUT_URL = "https://sscs7600.stage-leads-new.getcredithelpnow.com/checkout-INDPlan2"
+DIRECT_CHECKOUT_URL = "https://sscs7600.stage-leads-new.getcredithelpnow.com/checkout-LaunchSpecialFREECreditRepair"
 
 
 

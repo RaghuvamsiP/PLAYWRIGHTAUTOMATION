@@ -32,7 +32,7 @@ FIRST_NAME = "SSCS CB"
 CARD_EXPIRY = "12/30"  # any future MM/YY
 
 # Deep-link checkout URL for the direct-checkout test (bypasses /start).
-CHECKOUT_URL = "https://sscs7600.stage-leads-new.getcredithelpnow.com/checkout-NoFWF5Days"
+CHECKOUT_URL = "https://sscs7600.stage-leads-new.getcredithelpnow.com/checkout-NoFWFletter"
 
 # Standard payment-gateway test cards (Visa, Mastercard, Amex, Discover,
 # Diners, JCB). One is chosen at random per execution.
