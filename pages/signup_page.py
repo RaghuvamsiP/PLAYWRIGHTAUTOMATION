@@ -65,6 +65,11 @@ class SignupPage(BasePage):
         # field (#last_four_ssn, maxlength=4, type=password) rather than the old
         # three XXX-XX-XXXX segment inputs.
         self.ssn_last_four = page.locator("#last_four_ssn")
+        # Some environments (e.g. stage) still render the old full-SSN
+        # XXX-XX-XXXX segment inputs.
+        self.ssn_part1 = page.locator("#ssn_part1")
+        self.ssn_part2 = page.locator("#ssn_part2")
+        self.ssn_part3 = page.locator("#ssn_part3")
         self.street_input = page.get_by_placeholder("Enter a location")
         self.city_input = page.locator("#city")
         self.state_select = page.get_by_role("combobox", name="State")
@@ -210,15 +215,23 @@ class SignupPage(BasePage):
             dob,
         )
 
-    @allure.step("Fill SSN (last 4)")
+    @allure.step("Fill SSN")
     def fill_ssn(self, ssn: str):
         """
-        Checkout only collects the LAST FOUR SSN digits. Accepts a full 9-digit
-        SSN (with or without dashes) or a 4-digit value; either way only the last
-        four digits are entered.
+        Fill whichever SSN variant the checkout renders:
+          * last-four only (#last_four_ssn) — only the last 4 digits are entered;
+          * three segments (#ssn_part1-3)   — requires a full 9-digit SSN.
+        Accepts the SSN with or without dashes.
         """
         digits = ssn.replace("-", "").strip()
-        self.ssn_last_four.fill(digits[-4:])
+        either = self.ssn_last_four.or_(self.ssn_part1)
+        either.first.wait_for(state="visible", timeout=30000)
+        if self.ssn_last_four.count():
+            self.ssn_last_four.fill(digits[-4:])
+        else:
+            self.ssn_part1.fill(digits[:3])
+            self.ssn_part2.fill(digits[3:5])
+            self.ssn_part3.fill(digits[5:9])
 
     # ── SSN validation helpers ───────────────────────────────
     @allure.step("Set SSN last-four box: '{value}'")

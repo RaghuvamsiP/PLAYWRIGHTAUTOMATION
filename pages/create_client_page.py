@@ -27,6 +27,12 @@ class CreateClientPage(BasePage):
         self.date_of_birth = page.get_by_label("Date of Birth")
         self.dob_date_picker = page.get_by_role("button", name="Choose date")
 
+        # -- Credit Information: split SSN inputs (new UI — "SSN (Full 9 digits or Last 4)") --
+        self.ssn_part1 = self.dialog.get_by_placeholder("XXX", exact=True)
+        self.ssn_part2 = self.dialog.get_by_placeholder("XX", exact=True)
+        self.ssn_part3 = self.dialog.get_by_placeholder("XXXX", exact=True)
+        self.show_ssn_button = self.dialog.get_by_role("button", name="Show SSN")
+
         # -- Checkboxes --
         self.no_email_checkbox = page.get_by_label("Doesn't have email address (Not recommended)")
         self.previous_address_checkbox = page.get_by_label("Previous address (If at current address less than 2 years)")
@@ -55,9 +61,10 @@ class CreateClientPage(BasePage):
 
         # -- Status Section --
         self.status_dropdown = page.get_by_role("combobox", name="Status")
-        self.start_date = page.get_by_label("Start Date")
-        self.assigned_to = page.get_by_label("Assigned To")
-        self.referred_by = page.get_by_label("Referred By")
+        # Scoped to the dialog: the Clients grid has columns with the same labels
+        self.start_date = self.dialog.get_by_label("Start Date")
+        self.assigned_to = self.dialog.get_by_label("Assigned To")
+        self.referred_by = self.dialog.get_by_label("Referred By")
 
         # Statuses where portal access should NOT be enabled
         self.NO_PORTAL_STATUSES = ["Lead", "Prospect", "Lead/Inactive", "Inactive", "Suspended"]
@@ -67,6 +74,13 @@ class CreateClientPage(BasePage):
         # -- Portal Access Toggle --
         self.portal_access_toggle = page.get_by_label("Off / On (Recommended)")
         self.portal_access_info_icon = page.get_by_test_id("InfoIcon")
+
+        # -- Portal Settings (visible when Portal Access is on) --
+        self.portal_settings_heading = self.dialog.get_by_role("heading", name="Portal Settings")
+        self.resend_login_button = self.dialog.get_by_role("button", name="Resend Login Details")
+        self.agreement = self.dialog.get_by_label("Agreement*")
+        self.client_user_id = self.dialog.get_by_label("Client's User ID(Email)")
+        self.portal_language = self.dialog.get_by_label("Portal Language")
 
         # -- Action Buttons --
         self.cancel_button = self.dialog.get_by_role("button", name="Cancel")
@@ -85,6 +99,10 @@ class CreateClientPage(BasePage):
 
         # -- Clients Page --
         self.add_client_link = page.get_by_role("link", name="Add Lead / Client")
+        # New side-nav UI names the button without spaces
+        self.add_client_nav_link = page.get_by_role("link", name="Add Lead/Client")
+        self.clients_nav_link = page.get_by_role("link", name="Clients", exact=True).first
+        self.client_grid_rows = page.locator("[role='row'][data-rowindex]")
         self.clients_heading = page.get_by_role("heading", name="Clients")
 
         # -- Import / Export --
@@ -118,6 +136,26 @@ class CreateClientPage(BasePage):
         self.add_client_link.wait_for(state="visible", timeout=15000)
         self.add_client_link.click()
         expect(self.dialog).to_be_visible(timeout=15000)
+
+    def open_clients_module(self):
+        """Open the Clients module from the side navigation and wait for the grid to load."""
+        self.clients_nav_link.click()
+        self.page.wait_for_url(f"**{AppURLs.Clients.LIST}", timeout=30000)
+        expect(self.clients_heading).to_be_visible(timeout=30000)
+        expect(self.client_grid_rows.first).to_be_visible(timeout=30000)
+
+    def open_add_client_from_clients_page(self):
+        """Click 'Add Lead/Client' on the Clients page. The click is ignored until the
+        page finishes hydrating, so retry until the dialog actually opens."""
+        self.add_client_nav_link.wait_for(state="visible", timeout=15000)
+        for _ in range(3):
+            self.add_client_nav_link.click()
+            try:
+                expect(self.dialog).to_be_visible(timeout=8000)
+                return
+            except AssertionError:
+                pass
+        expect(self.dialog).to_be_visible(timeout=8000)
 
     def open_add_client_from_home(self):
         """Open the Add Lead/Client dialog from the Home page (more reliable)."""
@@ -178,6 +216,13 @@ class CreateClientPage(BasePage):
         if dob:
             self.date_of_birth.fill(dob)
 
+    def fill_ssn(self, ssn: str):
+        """Fill the split SSN inputs from a 9-digit string (e.g. '123456789' or '123-45-6789')."""
+        digits = ssn.replace("-", "")
+        self.ssn_part1.fill(digits[:3])
+        self.ssn_part2.fill(digits[3:5])
+        self.ssn_part3.fill(digits[5:])
+
     def fill_address(self, address: str, city: str = None, state: str = None,
                      zip_code: str = None, apt: str = None):
         self.mailing_address.fill(address)
@@ -230,6 +275,17 @@ class CreateClientPage(BasePage):
     def select_previous_state(self, state_name: str):
         self.prev_state.click()
         self.page.get_by_role("option", name=state_name, exact=True).click()
+
+    def select_assigned_to(self, team_member: str):
+        """Assigned To is a multi-select whose input stays empty; the logged-in user may
+        already be selected, and clicking a selected option deselects it."""
+        self.assigned_to.click()
+        option = self.page.get_by_role("option", name=team_member, exact=True)
+        if option.get_attribute("aria-selected") != "true":
+            option.click()
+        expect(option).to_have_attribute("aria-selected", "true")
+        # Tab closes the listbox; Escape can close the whole dialog
+        self.assigned_to.press("Tab")
 
     def select_referred_by(self, referrer_name: str):
         self.referred_by.click()

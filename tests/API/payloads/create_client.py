@@ -4,6 +4,8 @@ Only last_name and email are randomized (via Faker) per call; every other
 field is kept static.
 """
 
+from datetime import datetime
+
 from faker import Faker
 
 fake = Faker("en_US")
@@ -13,9 +15,12 @@ def build_create_client_payload() -> dict:
     """Return a fresh create-client payload with a unique last_name + email."""
     last_name = fake.last_name()
     email = f"{fake.unique.user_name()}@yopmail.com"
+    # API validates start_date against m/d/Y (date only — a time component is
+    # rejected with 422). Use the current date each call.
+    start_date = datetime.now().strftime("%m/%d/%Y")
 
     return {
-        "first_name": "Rate Limit",
+        "first_name": "Cancel Plan",
         "last_name": last_name,
         "email": email,
         "address": "123  William St",
@@ -23,7 +28,7 @@ def build_create_client_payload() -> dict:
         "state": "New York",
         "postcode": "10038",
         "client_status": "1",
-        "start_date": "06/15/2026",
+        "start_date": start_date,
         "assigned_to": [1],
         "portal_access": "on",
         "agreement": "no",

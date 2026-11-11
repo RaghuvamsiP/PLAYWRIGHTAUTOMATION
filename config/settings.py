@@ -7,7 +7,9 @@ BASE_URL = "https://qa.creditrepaircloud.com"
 API_BASE_URL = "https://restful-booker.herokuapp.com"
 
 # Public lead-capture / signup funnel (affiliate-specific subdomain)
-LEADS_BASE_URL = "https://sscs7600.stage-leads-new.getcredithelpnow.com"
+LEADS_BASE_URL = "https://amex4516.qa-leads-new.getcredithelpnow.com"
+# QA funnel tenant that offers the Individual/Household plan toggle
+HOUSEHOLD_LEADS_BASE_URL = "https://hplan.qa-leads-new.getcredithelpnow.com"
 # SecureClientAccess portal where the new client sets their password
 SCA_BASE_URL = "https://staging.secureclientaccess.com"
 

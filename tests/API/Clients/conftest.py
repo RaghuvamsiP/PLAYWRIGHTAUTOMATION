@@ -1,0 +1,41 @@
+import pytest
+from playwright.sync_api import Playwright
+
+from tests.API.helpers.auth import get_company_id, login_and_get_token
+
+AUTH_BASE_URL = "https://prod-auth-migration.creditrepaircloud.com"
+LOGIN_PATH = "/api/v1/login"
+CLIENTS_API_BASE_URL = "https://api.creditrepaircloud.com"
+EMAIL = "tollysystem@testmail.creditrepaircloud.com"
+PASSWORD = "P@ssw0rd12345"
+
+
+@pytest.fixture(scope="session")
+def token(playwright: Playwright) -> str:
+    """Authenticate once through the login API and return the bearer token."""
+    request = playwright.request.new_context(
+        base_url=AUTH_BASE_URL,
+        extra_http_headers={"Content-Type": "application/json"},
+    )
+
+    try:
+        return login_and_get_token(request, EMAIL, PASSWORD, LOGIN_PATH)
+    finally:
+        request.dispose()
+
+
+@pytest.fixture(scope="session")
+def auth_api(playwright: Playwright, token: str):
+    """Provide a reusable Clients API context authenticated with the login token."""
+    context = playwright.request.new_context(
+        base_url=CLIENTS_API_BASE_URL,
+        extra_http_headers={"Authorization": f"Bearer {token}"},
+    )
+    yield context
+    context.dispose()
+
+
+@pytest.fixture(scope="session")
+def company_id(auth_api) -> int:
+    """Return the company ID used by report processing requests."""
+    return get_company_id(auth_api)

@@ -7,7 +7,12 @@ Usage in page objects / tests:
     page.goto(AppURLs.Clients.LIST)
 """
 
-from config.settings import BASE_URL, LEADS_BASE_URL, SCA_BASE_URL
+from config.settings import (
+    BASE_URL,
+    HOUSEHOLD_LEADS_BASE_URL,
+    LEADS_BASE_URL,
+    SCA_BASE_URL,
+)
 
 
 class AppURLs:
@@ -36,6 +41,14 @@ class AppURLs:
         CHECKOUT_SUCCESS = f"{LEADS_BASE_URL}/checkout-success"
         # SecureClientAccess portal (separate host)
         SCA_HOME        = f"{SCA_BASE_URL}/home"
+
+    # ──────────────────────────────────────────────
+    # Household (Individual/Household toggle) funnel — QA tenant
+    # ──────────────────────────────────────────────
+    class HouseholdSignup:
+        START      = f"{HOUSEHOLD_LEADS_BASE_URL}/start"
+        SHOW_PLANS = f"{HOUSEHOLD_LEADS_BASE_URL}/show-plans"
+        CHECKOUT   = f"{HOUSEHOLD_LEADS_BASE_URL}/checkout"
 
     # ──────────────────────────────────────────────
     # Main Navigation Tabs
