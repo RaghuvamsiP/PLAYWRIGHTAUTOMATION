@@ -101,11 +101,34 @@ Anything importable lives under `src/`. `tests/` contains only tests.
 Pick the target with `ENV`. It defaults to `qa`, and no test code mentions an
 environment by name — switching only changes which profile is loaded.
 
-```bash
-pytest                      # qa
-ENV=stage pytest            # stage
-ENV=prod pytest -m smoke    # prod
+You never edit `settings.py` to change environment — only `ENV` changes.
+
+PowerShell (the default shell on this project):
+
+```powershell
+pytest                       # qa, the default
+$env:ENV="stage"; pytest     # stage
+$env:ENV="prod"; pytest -m smoke
+Remove-Item Env:\ENV         # back to qa
 ```
+
+`$env:ENV` persists for the rest of that terminal session, so clear it when
+you are done or you will keep running against stage without noticing.
+
+Git Bash:
+
+```bash
+pytest
+ENV=stage pytest             # set for this command only
+```
+
+cmd:
+
+```
+set ENV=stage && pytest
+```
+
+To make it stick for every run, put `ENV=stage` in your `.env` instead.
 
 Values resolve in this order, first hit wins:
 
@@ -124,6 +147,13 @@ message naming the file to set it in, rather than surfacing later as a 401.
 The stored login session is kept per environment
 (`.auth/storage_state.<env>.json`), so switching never reuses another
 environment's cookies.
+
+**Stage and prod are not runnable as shipped.** Their credential keys are
+deliberately blank, so the first test that needs one stops with a message
+naming the file. Fill them in your `.env` (not in the committed profile), and
+confirm the hosts: `stage.env`'s `BASE_URL` is my guess at the stage web app,
+and the CloudMail and funnel hosts are blank because the old code never
+referenced a non-QA value for them.
 
 ### Settings
 
