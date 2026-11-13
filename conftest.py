@@ -10,8 +10,8 @@ import time
 import pytest
 from playwright.sync_api import sync_playwright
 
-from config.settings import HEADLESS
-from utils.auth_helper import AUTH_FILE, create_auth
+from crc_automation.config.settings import HEADLESS
+from crc_automation.utils.auth_helper import AUTH_FILE, create_auth
 
 SESSION_MAX_AGE_SECONDS = 2 * 60 * 60  # 2 hours
 

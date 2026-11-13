@@ -1,8 +1,4 @@
-playwright
-pytest
-pytest-playwright
-requests
-faker
-allure-pytest
-pytest-xdist
-pytest-repeat
+# Dependencies are declared in pyproject.toml — this file installs the
+# framework (editable) together with them:
+#     pip install -r requirements.txt
+-e .
