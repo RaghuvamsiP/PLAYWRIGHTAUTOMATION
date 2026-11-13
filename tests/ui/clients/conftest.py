@@ -1,15 +1,10 @@
-import os
-
 import pytest
 import allure
 from playwright.sync_api import sync_playwright
 
-from crc_automation.config.settings import HEADLESS
+from crc_automation.config.settings import HEADLESS, require
 from crc_automation.config.urls import AppURLs
 
-# PDF-user account used by the client-documents tests (override in CI).
-PDF_USER_EMAIL = os.getenv("CRC_PDF_USER_EMAIL", "pdf@yopmail.com")
-PDF_USER_PASSWORD = os.getenv("CRC_PDF_USER_PASSWORD", "P@ssw0rd")
 
 
 @pytest.fixture(scope="session")
@@ -27,8 +22,12 @@ def pdf_user_browser():
         # Login once for the entire session
         login_page = context.new_page()
         login_page.goto(AppURLs.Auth.LOGIN, wait_until="domcontentloaded", timeout=60000)
-        login_page.get_by_placeholder("Email or User ID").fill(PDF_USER_EMAIL)
-        login_page.get_by_placeholder("Password").fill(PDF_USER_PASSWORD)
+        login_page.get_by_placeholder("Email or User ID").fill(
+            require("CRC_PDF_USER_EMAIL")
+        )
+        login_page.get_by_placeholder("Password").fill(
+            require("CRC_PDF_USER_PASSWORD")
+        )
         login_page.get_by_role("button", name="Login").click()
         login_page.wait_for_url(f"**{AppURLs.Auth.HOME}", timeout=30000)
         login_page.close()

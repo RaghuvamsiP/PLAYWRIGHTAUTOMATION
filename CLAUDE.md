@@ -57,9 +57,15 @@ If a test needs a wait after an action, add it to the page object method
 instead (see `get_validation_errors`, `wait_for_toaster`,
 `wait_for_dialog_closed`).
 
-**Credentials come from `os.getenv` with a default**, following
-`config/settings.py`. Never add a new hardcoded password. Never put a `.csv`
-of credentials inside the package.
+**Never hardcode a URL or credential in a test.** Environment-specific values
+live in `environments/<env>.env` and are read through `settings.py`. Add a new
+key to every profile, then read it with `os.getenv` (optional) or
+`settings.require()` (mandatory). `require()` fails with a message naming the
+profile, which is what makes a missing stage value obvious instead of a 401.
+
+Copying a test file to retarget another environment is the thing this
+configuration exists to prevent — `tests/api/rate_limit` still has three
+near-identical copies from before it existed.
 
 ## Running tests
 

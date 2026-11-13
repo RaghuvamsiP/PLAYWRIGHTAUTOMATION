@@ -1,15 +1,14 @@
-import os
-
 import pytest
 from playwright.sync_api import Playwright
 
-from crc_automation.config.settings import AUTH_API_BASE_URL, CRC_API_BASE_URL, LOGIN_API_PATH
+from crc_automation.config.settings import (
+    AUTH_API_BASE_URL,
+    CRC_API_BASE_URL,
+    LOGIN_API_PATH,
+    require,
+)
 from crc_automation.api.auth import get_company_id, login_and_get_token
 
-# Service account for the Clients API suite. Override in CI rather than
-# editing these defaults.
-EMAIL = os.getenv("CRC_CLIENTS_EMAIL", "tollysystem@testmail.creditrepaircloud.com")
-PASSWORD = os.getenv("CRC_CLIENTS_PASSWORD", "P@ssw0rd12345")
 
 
 @pytest.fixture(scope="session")
@@ -21,7 +20,10 @@ def token(playwright: Playwright) -> str:
     )
 
     try:
-        return login_and_get_token(request, EMAIL, PASSWORD, LOGIN_API_PATH)
+        return login_and_get_token(
+            request, require("CRC_CLIENTS_EMAIL"), require("CRC_CLIENTS_PASSWORD"),
+            LOGIN_API_PATH,
+        )
     finally:
         request.dispose()
 

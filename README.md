@@ -20,6 +20,7 @@ python -m venv venv
 venv\Scripts\activate
 pip install -r requirements.txt
 playwright install chromium
+cp .env.example .env
 ```
 
 `requirements.txt` is just `-e .`; the real dependency list lives in
@@ -95,14 +96,44 @@ Anything importable lives under `src/`. `tests/` contains only tests.
 
 ---
 
-## Configuration
+## Environments
 
-Every setting in `config/settings.py` reads an environment variable first and
-falls back to a QA default, so nothing needs editing to retarget a run.
+Pick the target with `ENV`. It defaults to `qa`, and no test code mentions an
+environment by name — switching only changes which profile is loaded.
+
+```bash
+pytest                      # qa
+ENV=stage pytest            # stage
+ENV=prod pytest -m smoke    # prod
+```
+
+Values resolve in this order, first hit wins:
+
+1. A real environment variable — what CI sets
+2. `.env` in the repo root — your personal overrides, git-ignored
+3. `environments/<ENV>.env` — the committed, non-secret profile
+4. The fallback in `settings.py`
+
+So `.env` always beats the committed profile, which is where personal
+accounts and secrets belong. Copy `.env.example` to get started.
+
+An unknown `ENV` fails immediately and lists the profiles that do exist. A
+value a test needs but has not been given fails through `require()` with a
+message naming the file to set it in, rather than surfacing later as a 401.
+
+The stored login session is kept per environment
+(`.auth/storage_state.<env>.json`), so switching never reuses another
+environment's cookies.
+
+### Settings
+
+Every setting reads an environment variable, so nothing needs editing to
+retarget a run.
 
 | Variable | Default | Used for |
 | --- | --- | --- |
-| `BASE_URL` | `https://qa.creditrepaircloud.com` | The web app |
+| `ENV` | `qa` | Which profile to load: `qa`, `stage`, `prod` |
+| `BASE_URL` | per profile | The web app |
 | `HEADLESS` | unset (headed) | `1`/`true`/`yes` to hide the browser |
 | `CRC_EMAIL` / `CRC_PASSWORD` | `pm@yopmail.com` | Main UI login |
 | `AUTH_API_BASE_URL` | `prod-auth-migration...` | Login API host |
@@ -211,9 +242,13 @@ throwaway investigation here rather than in `tests/`.
 
 ## Known gaps
 
-- Credential CSVs and some default passwords are committed to this repository.
-  They should be rotated and moved to a secrets store; the environment
-  variables above are the migration path.
+- Credential CSVs are committed to this repository, and `environments/qa.env`
+  still carries the QA test passwords that used to be hardcoded in
+  `settings.py`. Rotate them, then move them into `.env` and delete them from
+  the committed profile.
+- `stage.env` and `prod.env` have blanks where a host or tenant could not be
+  confirmed from the existing code. A test needing one fails with a message
+  naming the file.
 - `tests/api/alerts` carries a hardcoded Array.io server token.
 - The custom `browser` / `context` / `page` fixtures override the ones from
   `pytest-playwright`, so its CLI flags (`--headed`, `--browser`, `--video`,

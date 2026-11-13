@@ -5,10 +5,9 @@ from playwright.sync_api import sync_playwright
 from crc_automation.config.settings import (
     AUTH_DIR,
     AUTH_FILE,
-    DEFAULT_EMAIL,
-    DEFAULT_PASSWORD,
     HEADLESS,
     LOGIN_URL,
+    require,
 )
 
 __all__ = ["AUTH_FILE", "create_auth"]
@@ -23,8 +22,8 @@ def create_auth():
 
         page.goto(LOGIN_URL, timeout=60000)
 
-        page.get_by_placeholder("Email or User ID").fill(DEFAULT_EMAIL)
-        page.get_by_placeholder("Password").fill(DEFAULT_PASSWORD)
+        page.get_by_placeholder("Email or User ID").fill(require("CRC_EMAIL"))
+        page.get_by_placeholder("Password").fill(require("CRC_PASSWORD"))
         page.locator("button[type='submit']").click()
 
         page.wait_for_url("**/app/home")
