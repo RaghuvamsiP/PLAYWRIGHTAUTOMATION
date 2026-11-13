@@ -5,13 +5,13 @@ Best practice: One authenticated request context fixture
 
 import pytest
 import json
-from pathlib import Path
 from playwright.sync_api import Playwright
+
+from config.settings import API_TEST_DATA_DIR
 
 # -------------------------------------------------------------------
 # Base directory & Base URL
 # -------------------------------------------------------------------
-BASE_DIR = Path(__file__).resolve().parents[2] / "test_data" / "api"
 BASE_URL = "https://restful-booker.herokuapp.com"
 
 
@@ -19,7 +19,7 @@ BASE_URL = "https://restful-booker.herokuapp.com"
 # Utility Function: Reads JSON data from a given file
 # -------------------------------------------------------------------
 def read_json(filename):
-    return json.loads((BASE_DIR / filename).read_text())
+    return json.loads((API_TEST_DATA_DIR / filename).read_text())
 
 
 # -------------------------------------------------------------------

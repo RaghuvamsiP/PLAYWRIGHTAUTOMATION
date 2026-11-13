@@ -88,46 +88,49 @@ class TestPortalAccessPerStatus:
 
     def test_portal_on_for_active(self, aff_dialog: AffiliatePage):
         aff_dialog.select_status("Active")
-        aff_dialog.page.wait_for_timeout(500)
-        assert aff_dialog.is_portal_checked(), "Portal should be ON for Active"
+        expect(
+            aff_dialog.portal_access_toggle, "Portal should be ON for Active"
+        ).to_be_checked()
 
     def test_portal_off_for_inactive(self, aff_dialog: AffiliatePage):
         aff_dialog.select_status("Inactive")
-        aff_dialog.page.wait_for_timeout(500)
-        assert not aff_dialog.is_portal_checked(), "Portal should be OFF for Inactive"
+        expect(
+            aff_dialog.portal_access_toggle, "Portal should be OFF for Inactive"
+        ).not_to_be_checked()
 
     def test_portal_off_for_pending(self, aff_dialog: AffiliatePage):
         aff_dialog.select_status("Pending")
-        aff_dialog.page.wait_for_timeout(500)
-        assert not aff_dialog.is_portal_checked(), "Portal should be OFF for Pending"
+        expect(
+            aff_dialog.portal_access_toggle, "Portal should be OFF for Pending"
+        ).not_to_be_checked()
 
     def test_portal_cannot_be_enabled_for_inactive(self, aff_dialog: AffiliatePage):
         aff_dialog.select_status("Inactive")
-        aff_dialog.page.wait_for_timeout(500)
+        expect(aff_dialog.portal_access_toggle).not_to_be_checked()
         aff_dialog.portal_access_toggle.click()
-        aff_dialog.page.wait_for_timeout(500)
-        assert not aff_dialog.is_portal_checked(), "Portal should stay OFF for Inactive"
+        expect(
+            aff_dialog.portal_access_toggle, "Portal should stay OFF for Inactive"
+        ).not_to_be_checked()
 
     def test_portal_cannot_be_enabled_for_pending(self, aff_dialog: AffiliatePage):
         aff_dialog.select_status("Pending")
-        aff_dialog.page.wait_for_timeout(500)
+        expect(aff_dialog.portal_access_toggle).not_to_be_checked()
         aff_dialog.portal_access_toggle.click()
-        aff_dialog.page.wait_for_timeout(500)
-        assert not aff_dialog.is_portal_checked(), "Portal should stay OFF for Pending"
+        expect(
+            aff_dialog.portal_access_toggle, "Portal should stay OFF for Pending"
+        ).not_to_be_checked()
 
     def test_portal_unchecks_when_switching_active_to_inactive(self, aff_dialog: AffiliatePage):
         aff_dialog.select_status("Active")
-        assert aff_dialog.is_portal_checked()
+        expect(aff_dialog.portal_access_toggle).to_be_checked()
         aff_dialog.select_status("Inactive")
-        aff_dialog.page.wait_for_timeout(500)
-        assert not aff_dialog.is_portal_checked()
+        expect(aff_dialog.portal_access_toggle).not_to_be_checked()
 
     def test_portal_rechecks_when_switching_inactive_to_active(self, aff_dialog: AffiliatePage):
         aff_dialog.select_status("Inactive")
-        assert not aff_dialog.is_portal_checked()
+        expect(aff_dialog.portal_access_toggle).not_to_be_checked()
         aff_dialog.select_status("Active")
-        aff_dialog.page.wait_for_timeout(500)
-        assert aff_dialog.is_portal_checked()
+        expect(aff_dialog.portal_access_toggle).to_be_checked()
 
 
 # ════════════════════════════════════════════════════════════════
@@ -151,8 +154,7 @@ class TestProfileImageUpload:
         aff_dialog.fill_required_fields(data["first_name"], data["last_name"], data["email"], data["phone"])
         aff_dialog.select_status("Active")
         aff_dialog.submit_form()
-        aff_dialog.page.wait_for_timeout(3000)
-        aff_dialog.get_toaster_text()
+        aff_dialog.get_toaster_text()  # waits for the toaster itself
 
 
 # ════════════════════════════════════════════════════════════════
@@ -199,7 +201,9 @@ class TestEditAffiliate:
         new_last = f"Edited{status_label}"
         ap.last_name.fill(new_last)
         ap.update_form()
-        ap.page.wait_for_timeout(3000)
+        # The dialog closes once the update request succeeds — navigating
+        # before that can abort the in-flight request.
+        ap.wait_for_dialog_closed()
 
         # Verify in table
         ap.navigate_to_affiliates()
@@ -278,7 +282,6 @@ class TestMandatoryFieldValidation:
 
     def test_submit_empty_form_shows_errors(self, aff_dialog: AffiliatePage):
         aff_dialog.submit_form()
-        aff_dialog.page.wait_for_timeout(1000)
         errors = aff_dialog.get_validation_errors()
         assert any("first name" in e.lower() for e in errors), f"Expected first name error, got: {errors}"
         assert any("last name" in e.lower() for e in errors), f"Expected last name error, got: {errors}"
@@ -292,7 +295,6 @@ class TestMandatoryFieldValidation:
         aff_dialog.phone.fill("1234567890")
         aff_dialog.select_status("Active")
         aff_dialog.submit_form()
-        aff_dialog.page.wait_for_timeout(1000)
         errors = aff_dialog.get_validation_errors()
         assert any("first name" in e.lower() for e in errors)
 
@@ -302,7 +304,6 @@ class TestMandatoryFieldValidation:
         aff_dialog.phone.fill("1234567890")
         aff_dialog.select_status("Active")
         aff_dialog.submit_form()
-        aff_dialog.page.wait_for_timeout(1000)
         errors = aff_dialog.get_validation_errors()
         assert any("last name" in e.lower() for e in errors)
 
@@ -312,7 +313,6 @@ class TestMandatoryFieldValidation:
         aff_dialog.phone.fill("1234567890")
         aff_dialog.select_status("Active")
         aff_dialog.submit_form()
-        aff_dialog.page.wait_for_timeout(1000)
         errors = aff_dialog.get_validation_errors()
         assert any("email" in e.lower() for e in errors)
 
@@ -322,7 +322,6 @@ class TestMandatoryFieldValidation:
         aff_dialog.email_address.fill("t@y.com")
         aff_dialog.select_status("Active")
         aff_dialog.submit_form()
-        aff_dialog.page.wait_for_timeout(1000)
         errors = aff_dialog.get_validation_errors()
         assert any("phone" in e.lower() for e in errors)
 
@@ -332,7 +331,6 @@ class TestMandatoryFieldValidation:
         aff_dialog.email_address.fill("t@y.com")
         aff_dialog.phone.fill("1234567890")
         aff_dialog.submit_form()
-        aff_dialog.page.wait_for_timeout(1000)
         errors = aff_dialog.get_validation_errors()
         assert any("status" in e.lower() for e in errors)
 
@@ -375,7 +373,7 @@ class TestDuplicateEmailValidation:
         ap.fill_required_fields(dup_data["first_name"], dup_data["last_name"], data["email"], dup_data["phone"])
         ap.select_status("Active")
         ap.submit_form()
-        ap.page.wait_for_timeout(3000)
+        ap.wait_for_toaster()
 
         toaster_text = ap.toaster.first.inner_text()
         assert "already in use" in toaster_text.lower(), (
@@ -388,7 +386,7 @@ class TestDuplicateEmailValidation:
         data, ap = setup_affiliate(page, "Active")
         ap.open_delete_dialog_for(data["first_name"])
         ap.confirm_delete()
-        ap.page.wait_for_timeout(3000)
+        ap.wait_for_dialog_closed()
 
         # Now create a new affiliate with the deleted email
         ap.navigate_to_affiliates()
@@ -398,9 +396,8 @@ class TestDuplicateEmailValidation:
         ap.fill_required_fields(new_data["first_name"], new_data["last_name"], data["email"], new_data["phone"])
         ap.select_status("Active")
         ap.submit_form()
-        ap.page.wait_for_timeout(3000)
 
-        toaster_text = ap.get_toaster_text()
+        toaster_text = ap.get_toaster_text()  # waits for the toaster itself
         assert "already in use" not in toaster_text.lower(), (
             f"Deleted email should be reusable, but got: {toaster_text}"
         )
@@ -420,6 +417,10 @@ class TestProfileImageSizeValidation:
         """Uploading an image >10MB should show a validation/error message."""
         abs_path = os.path.abspath(LARGE_IMAGE_PATH)
         aff_dialog.upload_profile_image(abs_path)
+        # KEPT ON PURPOSE: this test asserts on whatever the page ends up
+        # showing for an oversized file. There is no success or error
+        # element to wait on — waiting for one would presume the outcome
+        # the test is checking for.
         aff_dialog.page.wait_for_timeout(2000)
 
         # Fill required fields and submit to trigger server-side validation
@@ -427,6 +428,9 @@ class TestProfileImageSizeValidation:
         aff_dialog.fill_required_fields(data["first_name"], data["last_name"], data["email"], data["phone"])
         aff_dialog.select_status("Active")
         aff_dialog.submit_form()
+        # KEPT ON PURPOSE: see above — the assertion scrapes the whole page
+        # for size wording and skips if absent, so there is no locator to
+        # wait for.
         aff_dialog.page.wait_for_timeout(5000)
 
         # Check for size-related error in toaster or validation messages
@@ -481,7 +485,9 @@ class TestClickNameToEdit:
         # Update company name
         ap.company_name.fill("ClickEditCompany")
         ap.update_form()
-        ap.page.wait_for_timeout(3000)
+        # The dialog closes once the update request succeeds — navigating
+        # before that can abort the in-flight request.
+        ap.wait_for_dialog_closed()
 
         # Verify in table
         ap.navigate_to_affiliates()
@@ -515,10 +521,8 @@ class TestDeleteAffiliate:
 
         ap.open_delete_dialog_for(data["first_name"])
         ap.confirm_delete()
-        ap.page.wait_for_timeout(3000)
+        ap.wait_for_dialog_closed()
 
         # Verify removed from table
         ap.navigate_to_affiliates()
-        assert not ap.is_affiliate_in_table(data["first_name"]), (
-            f"Affiliate '{data['first_name']}' still in table after delete"
-        )
+        ap.expect_affiliate_absent_from_table(data["first_name"])

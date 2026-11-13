@@ -1,4 +1,3 @@
-import pytest
 import requests
 
 def test_get_alerts_for_user_ids():

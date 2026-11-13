@@ -1,4 +1,5 @@
 from playwright.sync_api import Page, expect
+from playwright.sync_api import TimeoutError as PlaywrightTimeoutError
 from pages.base_page import BasePage
 from config.urls import AppURLs
 
@@ -194,13 +195,13 @@ class AffiliatePage(BasePage):
 
     def select_status(self, status_name: str):
         self.status_dropdown.click()
-        self.page.wait_for_timeout(300)
         options = self.page.locator("li[role='option']")
         expect(options.first).to_be_visible(timeout=5000)
         for opt in options.all():
             if opt.inner_text().strip().startswith(status_name.split(" ")[0]):
                 opt.click()
-                self.page.wait_for_timeout(300)
+                # The menu closes once the selection is applied.
+                expect(options.first).to_be_hidden(timeout=5000)
                 return
         # Fallback: exact match
         self.page.get_by_role("option", name=status_name, exact=True).click()
@@ -211,7 +212,6 @@ class AffiliatePage(BasePage):
 
     def get_status_options(self) -> list[str]:
         self.status_dropdown.click()
-        self.page.wait_for_timeout(300)
         options = self.page.locator("li[role='option']")
         expect(options.first).to_be_visible(timeout=5000)
         texts = options.all_text_contents()
@@ -225,7 +225,9 @@ class AffiliatePage(BasePage):
         self.mailing_address.press_sequentially(address_text, delay=100)
         expect(self.pac_items.first).to_be_visible(timeout=10000)
         self.pac_items.nth(suggestion_index).click()
-        self.page.wait_for_timeout(1000)
+        # Google Places fills the remaining address fields asynchronously;
+        # City is the first one populated.
+        expect(self.city).not_to_have_value("", timeout=10000)
 
     def get_address_values(self) -> dict:
         return {
@@ -245,6 +247,9 @@ class AffiliatePage(BasePage):
 
     def upload_profile_image(self, file_path: str):
         self.file_input.set_input_files(file_path)
+        # NOTE: the dialog renders no preview element and fires no request we
+        # can wait on, so there is no deterministic signal here. Replace this
+        # settle with expect() on the preview once that element is known.
         self.page.wait_for_timeout(1000)
 
     # ─── Submit / Update / Cancel ─────────────────────────────
@@ -269,18 +274,46 @@ class AffiliatePage(BasePage):
     # ─── Toaster ──────────────────────────────────────────────
 
     def get_toaster_text(self) -> str:
-        expect(self.toaster).to_be_visible(timeout=10000)
+        self.wait_for_toaster()
         return self.toaster.inner_text()
 
-    def wait_for_toaster_dismiss(self):
-        expect(self.toaster).to_be_visible(timeout=10000)
-        expect(self.toaster).to_be_hidden(timeout=15000)
+    def wait_for_toaster(self, timeout: int = 15000):
+        """Wait for the toaster that confirms the server answered the submit."""
+        expect(self.toaster).to_be_visible(timeout=timeout)
+
+    def wait_for_toaster_dismiss(self, timeout: int = 15000):
+        """Wait for the toaster to auto-dismiss.
+
+        Callers that already waited for it to appear must not wait for
+        `to_be_visible` again — by then it may already have gone.
+        """
+        expect(self.toaster).to_be_hidden(timeout=timeout)
+
+    def wait_for_dialog_closed(self, timeout: int = 15000):
+        """Wait for the Add/Edit dialog to close, which happens once the
+        create/update/delete request has come back successfully."""
+        expect(self.dialog).to_be_hidden(timeout=timeout)
 
     # ─── Table Helpers ────────────────────────────────────────
 
-    def is_affiliate_in_table(self, name: str) -> bool:
-        self.page.wait_for_timeout(1000)
-        return self.page.locator(f"[role='row']:has-text('{name}')").count() > 0
+    def is_affiliate_in_table(self, name: str, timeout: int = 10000) -> bool:
+        """Whether a row for `name` shows up within `timeout`.
+
+        Use expect_affiliate_absent_from_table() for the negative case — a
+        False here only means the row had not appeared yet.
+        """
+        row = self.page.locator(f"[role='row']:has-text('{name}')").first
+        try:
+            row.wait_for(state="visible", timeout=timeout)
+            return True
+        except PlaywrightTimeoutError:
+            return False
+
+    def expect_affiliate_absent_from_table(self, name: str, timeout: int = 15000):
+        """Assert no row for `name` remains, retrying while the table refreshes."""
+        expect(self.page.locator(f"[role='row']:has-text('{name}')")).to_have_count(
+            0, timeout=timeout
+        )
 
     def click_affiliate_name_in_table(self, name: str):
         """Click on an affiliate's name link in the table to open the Edit dialog."""
@@ -308,6 +341,12 @@ class AffiliatePage(BasePage):
 
     # ─── Validation Errors ────────────────────────────────────
 
-    def get_validation_errors(self) -> list[str]:
+    def get_validation_errors(self, timeout: int = 10000) -> list[str]:
+        """Return the visible field-validation messages.
+
+        Waits for the first message to render, so callers do not need to
+        sleep after submitting an invalid form.
+        """
+        expect(self.error_messages.first).to_be_visible(timeout=timeout)
         errors = self.error_messages.all()
         return [e.inner_text().strip() for e in errors if e.inner_text().strip()]

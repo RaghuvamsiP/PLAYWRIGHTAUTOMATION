@@ -156,7 +156,8 @@ class HouseholdSignupPage(SignupPage):
 
         if self.household_banner_close.count() and self.household_banner_close.is_visible():
             self.household_banner_close.click()
-            self.page.wait_for_timeout(500)
+            # The toggle sits under the banner, so wait for it to go.
+            expect(self.household_banner_close).to_be_hidden(timeout=10000)
 
         self.household_switch.click()
         if not self.household_toggle.is_checked():

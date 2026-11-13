@@ -115,7 +115,7 @@ def test_ssn_box_max_length(checkout, box, typed, expected):
 def test_ssn_empty_shows_message(checkout):
     signup = checkout
     signup.clear_ssn()
-    signup.click_checkout_expecting_validation()  # includes 4s settle wait
+    signup.click_checkout_expecting_validation()
 
     expect(signup.error_message).to_contain_text(EMPTY_MSG)
     assert signup.ssn_segment_has_error(1), "Box 1 should be flagged for empty SSN"
@@ -143,7 +143,7 @@ def test_ssn_empty_shows_message(checkout):
 def test_ssn_partial_shows_message(checkout, case, p1, p2, p3, empty_box):
     signup = checkout
     signup.set_ssn_parts(p1, p2, p3)
-    signup.click_checkout_expecting_validation()  # includes 4s settle wait
+    signup.click_checkout_expecting_validation()
 
     # Same partial message regardless of which box is incomplete.
     expect(signup.error_message).to_contain_text(PARTIAL_MSG)
@@ -163,7 +163,9 @@ def test_ssn_partial_shows_message(checkout, case, p1, p2, p3, empty_box):
 def test_ssn_full_valid_passes(checkout):
     signup = checkout
     signup.set_ssn_parts("123", "45", "6789")
-    signup.click_checkout_expecting_validation()  # includes 4s settle wait
+    # This test asserts that NO error appears, so it has to give the
+    # client-side validation time to run — there is nothing to wait for.
+    signup.click_checkout_expecting_validation(settle_ms=4000)
 
     # validateSsn() passes and clears the 'error' class on every box.
     assert not signup.ssn_segment_has_error(1), "Box 1 should be valid"

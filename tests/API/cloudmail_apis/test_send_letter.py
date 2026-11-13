@@ -15,12 +15,12 @@ and the wallet amount sent must be > $6.
 
 import copy
 import json
-from pathlib import Path
+
+from config.settings import API_TEST_DATA_DIR
 
 SEND_LETTER_URL = "http://qa-cloudmail-letters.internal.creditrepaircloud.com/api/letter"
 
-TEST_DATA_DIR = Path(__file__).resolve().parents[2] / "test_data" / "api"
-BASE_PAYLOAD_FILE = TEST_DATA_DIR / "send_letter_payload.json"
+BASE_PAYLOAD_FILE = API_TEST_DATA_DIR / "send_letter_payload.json"
 
 with open(BASE_PAYLOAD_FILE, "r", encoding="utf-8") as _f:
     _BASE_PAYLOAD = json.load(_f)

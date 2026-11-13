@@ -1,9 +1,15 @@
+import os
+
 import pytest
 import allure
 from playwright.sync_api import sync_playwright
 
-from config.settings import BASE_URL
+from config.settings import HEADLESS
 from config.urls import AppURLs
+
+# PDF-user account used by the client-documents tests (override in CI).
+PDF_USER_EMAIL = os.getenv("CRC_PDF_USER_EMAIL", "pdf@yopmail.com")
+PDF_USER_PASSWORD = os.getenv("CRC_PDF_USER_PASSWORD", "P@ssw0rd")
 
 
 @pytest.fixture(scope="session")
@@ -11,7 +17,7 @@ def pdf_user_browser():
     """Launch a browser and login with pdf@yopmail.com credentials.
     Session-scoped so the login happens once for all tests using this fixture."""
     with sync_playwright() as p:
-        browser = p.chromium.launch(headless=False)
+        browser = p.chromium.launch(headless=HEADLESS)
         context = browser.new_context()
 
         # Block tracking popups that overlay UI elements
@@ -21,8 +27,8 @@ def pdf_user_browser():
         # Login once for the entire session
         login_page = context.new_page()
         login_page.goto(AppURLs.Auth.LOGIN, wait_until="domcontentloaded", timeout=60000)
-        login_page.get_by_placeholder("Email or User ID").fill("pdf@yopmail.com")
-        login_page.get_by_placeholder("Password").fill("P@ssw0rd")
+        login_page.get_by_placeholder("Email or User ID").fill(PDF_USER_EMAIL)
+        login_page.get_by_placeholder("Password").fill(PDF_USER_PASSWORD)
         login_page.get_by_role("button", name="Login").click()
         login_page.wait_for_url(f"**{AppURLs.Auth.HOME}", timeout=30000)
         login_page.close()
@@ -41,7 +47,7 @@ def pdf_user_page(pdf_user_browser, request):
     yield page
 
     # On failure: attach screenshot and URL to Allure
-    if request.node.rep_call and request.node.rep_call.failed:
+    if getattr(request.node, "rep_call", None) and request.node.rep_call.failed:
         allure.attach(
             page.screenshot(full_page=True),
             name="Screenshot on Failure",
@@ -54,11 +60,3 @@ def pdf_user_page(pdf_user_browser, request):
         )
 
     page.close()
-
-
-@pytest.hookimpl(hookwrapper=True)
-def pytest_runtest_makereport(item, call):
-    """Store test result on the item so fixtures can access it."""
-    outcome = yield
-    report = outcome.get_result()
-    setattr(item, f"rep_{report.when}", report)

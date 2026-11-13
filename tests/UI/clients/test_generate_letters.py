@@ -26,15 +26,13 @@ import os
 
 import allure
 import pytest
-from playwright.sync_api import Page, expect
+from playwright.sync_api import Page
 
+from config.settings import TEST_DATA_DIR
 from pages.generate_letters_page import GenerateLettersPage
-from config.urls import AppURLs
 
-# Resolve the PDF path relative to the project root
-PDF_FILE_PATH = os.path.join(
-    os.path.dirname(__file__), "..", "..", "..", "test_data", "test_document.pdf"
-)
+# Resolved from the project root, not the current working directory.
+PDF_FILE_PATH = str(TEST_DATA_DIR / "test_document.pdf")
 
 
 @allure.feature("Generate Letters")

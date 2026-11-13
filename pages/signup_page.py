@@ -255,14 +255,18 @@ class SignupPage(BasePage):
         return self.ssn_last_four.input_value()
 
     @allure.step("Click Checkout (expecting client-side validation to block)")
-    def click_checkout_expecting_validation(self, settle_ms: int = 4000):
+    def click_checkout_expecting_validation(self, settle_ms: int = 0):
         """
         Click Checkout without waiting for navigation — used for validation tests.
-        Waits `settle_ms` (default 4s) afterwards so each validation message has
-        time to render before it is asserted.
+
+        Callers asserting that a message *appears* should not pass settle_ms:
+        expect(...).to_contain_text() already retries until it renders.
+        Pass settle_ms only when asserting that no error appears, since an
+        absence has nothing to wait for.
         """
         self.checkout_button.click()
-        self.page.wait_for_timeout(settle_ms)
+        if settle_ms:
+            self.page.wait_for_timeout(settle_ms)
 
     def get_error_message(self) -> str:
         return self.error_message.inner_text().strip()

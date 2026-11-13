@@ -1,25 +1,27 @@
+import os
+
 import pytest
 from playwright.sync_api import Playwright
 
+from config.settings import AUTH_API_BASE_URL, CRC_API_BASE_URL, LOGIN_API_PATH
 from tests.API.helpers.auth import get_company_id, login_and_get_token
 
-AUTH_BASE_URL = "https://prod-auth-migration.creditrepaircloud.com"
-LOGIN_PATH = "/api/v1/login"
-CLIENTS_API_BASE_URL = "https://api.creditrepaircloud.com"
-EMAIL = "tollysystem@testmail.creditrepaircloud.com"
-PASSWORD = "P@ssw0rd12345"
+# Service account for the Clients API suite. Override in CI rather than
+# editing these defaults.
+EMAIL = os.getenv("CRC_CLIENTS_EMAIL", "tollysystem@testmail.creditrepaircloud.com")
+PASSWORD = os.getenv("CRC_CLIENTS_PASSWORD", "P@ssw0rd12345")
 
 
 @pytest.fixture(scope="session")
 def token(playwright: Playwright) -> str:
     """Authenticate once through the login API and return the bearer token."""
     request = playwright.request.new_context(
-        base_url=AUTH_BASE_URL,
+        base_url=AUTH_API_BASE_URL,
         extra_http_headers={"Content-Type": "application/json"},
     )
 
     try:
-        return login_and_get_token(request, EMAIL, PASSWORD, LOGIN_PATH)
+        return login_and_get_token(request, EMAIL, PASSWORD, LOGIN_API_PATH)
     finally:
         request.dispose()
 
@@ -28,7 +30,7 @@ def token(playwright: Playwright) -> str:
 def auth_api(playwright: Playwright, token: str):
     """Provide a reusable Clients API context authenticated with the login token."""
     context = playwright.request.new_context(
-        base_url=CLIENTS_API_BASE_URL,
+        base_url=CRC_API_BASE_URL,
         extra_http_headers={"Authorization": f"Bearer {token}"},
     )
     yield context

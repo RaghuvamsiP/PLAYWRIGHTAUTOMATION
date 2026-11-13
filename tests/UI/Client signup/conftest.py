@@ -1,19 +1,20 @@
 import json
-import pathlib
 
 import pytest
 import allure
 from playwright.sync_api import sync_playwright
 
+from config.settings import HEADLESS, PROJECT_ROOT
+
 # Where raw network / console artifacts are written for every run.
-ARTIFACTS_DIR = pathlib.Path("reports/network")
+ARTIFACTS_DIR = PROJECT_ROOT / "reports" / "network"
 
 
 @pytest.fixture(scope="session")
 def unauthenticated_browser():
     """The public signup funnel must run with no stored CRC auth state."""
     with sync_playwright() as p:
-        browser = p.chromium.launch(headless=False)
+        browser = p.chromium.launch(headless=HEADLESS)
         yield browser
         browser.close()
 
@@ -132,11 +133,3 @@ def fresh_page(unauthenticated_browser, request):
             name="Network HAR",
             extension="har",
         )
-
-
-@pytest.hookimpl(hookwrapper=True)
-def pytest_runtest_makereport(item, call):
-    """Expose test outcome to the fresh_page fixture for failure screenshots."""
-    outcome = yield
-    report = outcome.get_result()
-    setattr(item, f"rep_{report.when}", report)

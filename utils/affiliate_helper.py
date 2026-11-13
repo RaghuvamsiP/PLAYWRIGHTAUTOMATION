@@ -44,7 +44,7 @@ def create_affiliate(page: Page, status_label: str, full_details: bool = False) 
 
     ap.select_status(STATUS_MAP[status_label])
     ap.submit_form()
-    page.wait_for_timeout(3000)
+    ap.wait_for_toaster()
 
     data["full_name"] = f"{data['first_name']} {data['last_name']}"
     return data, ap

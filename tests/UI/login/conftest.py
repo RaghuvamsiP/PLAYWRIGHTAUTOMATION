@@ -2,11 +2,13 @@ import pytest
 import allure
 from playwright.sync_api import sync_playwright
 
+from config.settings import HEADLESS
+
 
 @pytest.fixture(scope="session")
 def unauthenticated_browser():
     with sync_playwright() as p:
-        browser = p.chromium.launch(headless=False)
+        browser = p.chromium.launch(headless=HEADLESS)
         yield browser
         browser.close()
 
@@ -19,7 +21,7 @@ def fresh_page(unauthenticated_browser, request):
     yield page
 
     # On failure: attach screenshot, current URL, and page source to Allure
-    if request.node.rep_call and request.node.rep_call.failed:
+    if getattr(request.node, "rep_call", None) and request.node.rep_call.failed:
         allure.attach(
             page.screenshot(full_page=True),
             name="Screenshot on Failure",
@@ -33,11 +35,3 @@ def fresh_page(unauthenticated_browser, request):
 
     page.close()
     context.close()
-
-
-@pytest.hookimpl(hookwrapper=True)
-def pytest_runtest_makereport(item, call):
-    """Store test result on the item so the fresh_page fixture can access it."""
-    outcome = yield
-    report = outcome.get_result()
-    setattr(item, f"rep_{report.when}", report)

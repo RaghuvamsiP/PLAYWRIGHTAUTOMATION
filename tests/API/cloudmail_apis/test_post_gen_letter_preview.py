@@ -6,14 +6,14 @@ to the letter-preview endpoint.
 """
 
 import json
-from pathlib import Path
 
 import pytest
 
+from config.settings import API_TEST_DATA_DIR
+
 LETTER_PREVIEW_URL = "http://qa-cloudmail-letters.internal.creditrepaircloud.com/api/letter/preview"
 
-TEST_DATA_DIR = Path(__file__).resolve().parents[2] / "test_data" / "api"
-PAYLOADS_FILE = TEST_DATA_DIR / "letter_preview_payloads.json"
+PAYLOADS_FILE = API_TEST_DATA_DIR / "letter_preview_payloads.json"
 
 with open(PAYLOADS_FILE, "r", encoding="utf-8") as _f:
     _PAYLOADS = json.load(_f)

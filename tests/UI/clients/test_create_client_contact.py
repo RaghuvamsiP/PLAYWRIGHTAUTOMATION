@@ -446,23 +446,22 @@ class TestPortalAccessPerStatus:
     def test_portal_not_checked_for_non_client_status(self, client_page: CreateClientPage, status: str):
         """Portal toggle must be unchecked when a non-client status is selected."""
         client_page.select_status(status)
-        client_page.page.wait_for_timeout(500)
         expect(client_page.portal_access_toggle).not_to_be_checked()
 
     @pytest.mark.parametrize("status", NO_PORTAL_STATUSES)
     def test_portal_cannot_be_enabled_for_non_client_status(self, client_page: CreateClientPage, status: str):
         """Manually checking the portal toggle should not stick for non-client statuses."""
         client_page.select_status(status)
-        client_page.page.wait_for_timeout(500)
+        # Settle on the status before poking the toggle, so the click
+        # cannot land before the status change has been applied.
+        expect(client_page.portal_access_toggle).not_to_be_checked()
         client_page.portal_access_toggle.click()
-        client_page.page.wait_for_timeout(500)
         expect(client_page.portal_access_toggle).not_to_be_checked()
 
     @pytest.mark.parametrize("status", PORTAL_STATUSES)
     def test_portal_auto_enabled_for_client_status(self, client_page: CreateClientPage, status: str):
         """Portal toggle should automatically enable when Client or Custom status is selected."""
         client_page.select_status(status)
-        client_page.page.wait_for_timeout(500)
         expect(client_page.portal_access_toggle).to_be_checked()
 
     def test_portal_unchecks_when_switching_client_to_lead(self, client_page: CreateClientPage):
@@ -470,7 +469,6 @@ class TestPortalAccessPerStatus:
         client_page.select_status("Client")
         expect(client_page.portal_access_toggle).to_be_checked()
         client_page.select_status("Lead")
-        client_page.page.wait_for_timeout(500)
         expect(client_page.portal_access_toggle).not_to_be_checked()
 
     def test_portal_rechecks_when_switching_lead_to_client(self, client_page: CreateClientPage):
@@ -478,14 +476,12 @@ class TestPortalAccessPerStatus:
         client_page.select_status("Lead")
         expect(client_page.portal_access_toggle).not_to_be_checked()
         client_page.select_status("Client")
-        client_page.page.wait_for_timeout(500)
         expect(client_page.portal_access_toggle).to_be_checked()
 
     def test_portal_stays_unchecked_across_non_client_statuses(self, client_page: CreateClientPage):
         """Cycling through all non-client statuses should keep portal unchecked."""
         for status in NO_PORTAL_STATUSES:
             client_page.select_status(status)
-            client_page.page.wait_for_timeout(300)
             expect(client_page.portal_access_toggle).not_to_be_checked()
 
 
@@ -546,7 +542,8 @@ class TestAutoSuggestAddress:
         expect(client_page.pac_items.first).to_be_visible(timeout=10000)
         if client_page.pac_items.count() > 1:
             client_page.pac_items.nth(1).click()
-            client_page.page.wait_for_timeout(1000)
+            # Google Places fills the rest of the address asynchronously.
+            expect(client_page.city).not_to_have_value("", timeout=10000)
             values = client_page.get_current_address_values()
             assert values["mailing_address"] != "", "Address not filled for 2nd suggestion"
             assert values["city"] != "", "City not filled for 2nd suggestion"

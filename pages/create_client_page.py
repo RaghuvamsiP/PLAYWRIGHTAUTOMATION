@@ -309,7 +309,8 @@ class CreateClientPage(BasePage):
         self.mailing_address.press_sequentially(address_text, delay=100)
         expect(self.pac_items.first).to_be_visible(timeout=10000)
         self.pac_items.nth(suggestion_index).click()
-        self.page.wait_for_timeout(1000)
+        # Google Places fills the rest of the address asynchronously.
+        expect(self.city).not_to_have_value("", timeout=10000)
 
     def type_and_select_prev_autosuggest_address(self, address_text: str, suggestion_index: int = 0):
         """Type into Previous Mailing Address to trigger Google Places, then select a suggestion."""
@@ -319,7 +320,8 @@ class CreateClientPage(BasePage):
         self.prev_mailing_address.press_sequentially(address_text, delay=100)
         expect(self.pac_items.first).to_be_visible(timeout=10000)
         self.pac_items.nth(suggestion_index).click()
-        self.page.wait_for_timeout(1000)
+        # Google Places fills the rest of the address asynchronously.
+        expect(self.prev_city).not_to_have_value("", timeout=10000)
 
     def get_current_address_values(self) -> dict:
         """Return all current address field values as a dict."""

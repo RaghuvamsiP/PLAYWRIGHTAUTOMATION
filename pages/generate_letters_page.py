@@ -128,7 +128,8 @@ class GenerateLettersPage(BasePage):
         btn = self.page.get_by_role("button", name="Next")
         btn.wait_for(state="visible", timeout=10000)
         btn.click()
-        self.page.wait_for_timeout(2000)
+        # No settle here: every caller's next step waits for its own
+        # element (the accordion, the mail-option card, Submit Order).
 
     # ─── Attach Additional Documents ─────────────────────────
 
@@ -137,7 +138,8 @@ class GenerateLettersPage(BasePage):
         accordion = self.page.get_by_role("button", name="Attach Additional Documents")
         accordion.wait_for(state="visible", timeout=10000)
         accordion.click()
-        self.page.wait_for_timeout(1000)
+        # The caller's next action waits for the 'Upload New' button,
+        # which only becomes visible once the accordion has expanded.
 
     @allure.step("Click 'Upload New' for selected letter and upload PDF file")
     def upload_pdf(self, file_path: str):
@@ -155,10 +157,9 @@ class GenerateLettersPage(BasePage):
         file_input = self.page.locator("input#choose-file")
         file_input.set_input_files(file_path)
 
-        # Wait for file to be attached, then click "Upload Document(s)"
-        self.page.wait_for_timeout(2000)
+        # The dialog enables its submit button once the file is attached.
         upload_docs_btn = dialog.get_by_role("button", name="Upload Document(s)")
-        upload_docs_btn.wait_for(state="visible", timeout=10000)
+        expect(upload_docs_btn).to_be_enabled(timeout=15000)
         upload_docs_btn.click()
 
         # Wait for upload to complete and dialog to close

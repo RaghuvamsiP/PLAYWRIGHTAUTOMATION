@@ -7,10 +7,9 @@
 6) Delete Booking (DELETE)
 """
 
-import pytest
 import json
-from pathlib import Path
-from playwright.sync_api import Playwright
+
+from config.settings import API_TEST_DATA_DIR
 
 # -------------------------------------------------------------------
 # Base URL of the RESTful Booker API
@@ -20,14 +19,13 @@ base_url = "https://restful-booker.herokuapp.com"
 # -------------------------------------------------------------------
 # Test data directory
 # -------------------------------------------------------------------
-TEST_DATA_DIR = Path(__file__).resolve().parents[2] / "test_data" / "api"
 
 
 # -------------------------------------------------------------------
 # Utility Function: Reads and returns JSON data from a given file path
 # -------------------------------------------------------------------
 def read_json(filename):
-    with open(TEST_DATA_DIR / filename, "r") as file:
+    with open(API_TEST_DATA_DIR / filename, "r") as file:
         return json.load(file)
 
 
