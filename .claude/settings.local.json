@@ -2,7 +2,15 @@
   "permissions": {
     "allow": [
       "mcp__playwright__browser_navigate",
-      "mcp__playwright__browser_run_code"
+      "mcp__playwright__browser_run_code",
+      "Bash(venv/Scripts/python.exe -m compileall -q . -x \"venv|__pycache__\")",
+      "Bash(echo \"EXIT=$?\")",
+      "Bash(venv/Scripts/python.exe -m pytest --collect-only -q -p no:cacheprovider --alluredir=/dev/null)",
+      "Bash(venv/Scripts/python.exe -m ruff --version)",
+      "Bash(venv/Scripts/python.exe -m flake8 --version)",
+      "Bash(venv/Scripts/python.exe -m pyflakes --version)",
+      "Bash(venv/Scripts/pip.exe list *)",
+      "Bash(venv/Scripts/python.exe -I \"C:/Users/Admin/AppData/Local/Temp/claude/3e8ee8f2943e0176/2efd0170-7b56-4cca-9c73-0b0c5df4f18a/scratchpad/audit.py\" .)"
     ]
   }
 }

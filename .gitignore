@@ -3,7 +3,7 @@ __pycache__/
 .pytest_cache/
 *.pyc
 *.pyo
-tests/auth.json
+.auth/
 .env
 *.log
 .idea/
