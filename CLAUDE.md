@@ -64,8 +64,9 @@ key to every profile, then read it with `os.getenv` (optional) or
 profile, which is what makes a missing stage value obvious instead of a 401.
 
 Copying a test file to retarget another environment is the thing this
-configuration exists to prevent — `tests/api/rate_limit` still has three
-near-identical copies from before it existed.
+configuration exists to prevent. `tests/api/rate_limit` used to hold three
+near-identical copies; it is now one file driven by the profile. Do not
+reintroduce that pattern.
 
 ## Running tests
 
@@ -86,8 +87,8 @@ transactions). Specifically:
   **production**: they authenticate against
   `prod-auth-migration.creditrepaircloud.com` and call
   `api.creditrepaircloud.com`. `test_report_import.py` creates a client there.
-- `tests/api/rate_limit/test_rate_limit_prod.py` targets production on purpose
-  and floods it to trip rate limits.
+- `tests/api/rate_limit` floods endpoints and creates records. It runs against
+  whatever ENV is set, so `ENV=prod` points it at production on purpose.
 - `tests/api/cloudmail` uses QA internal hosts but spends real wallet balance.
 - `tests/api/alerts` calls the third-party array.io API.
 - UI tests drive a browser against the QA app and create records there.

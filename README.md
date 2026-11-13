@@ -279,6 +279,11 @@ throwaway investigation here rather than in `tests/`.
 - `stage.env` and `prod.env` have blanks where a host or tenant could not be
   confirmed from the existing code. A test needing one fails with a message
   naming the file.
+- `tests/api/rate_limit` needs three short-lived tokens in your `.env`
+  (`RATE_LIMIT_BEARER_TOKEN`, `RATE_LIMIT_TEAM_MEMBER_TOKEN`,
+  `RATE_LIMIT_OAUTH_TOKEN`). They expire within a day, so they are not
+  committed; without them those ten tests fail immediately naming the variable
+  rather than looking like a rate-limit result.
 - `tests/api/alerts` carries a hardcoded Array.io server token.
 - The custom `browser` / `context` / `page` fixtures override the ones from
   `pytest-playwright`, so its CLI flags (`--headed`, `--browser`, `--video`,
