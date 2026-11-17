@@ -1,0 +1,1310 @@
+{
+    "status": "success",
+    "message": "Preview report fetched successfully.",
+    "message_key": "pendingReports.previewFetched",
+    "data": {
+        "credit_score": {
+            "TransUnion": "604",
+            "Experian": "616",
+            "Equifax": "631"
+        },
+        "account_summary": [
+            {
+                "ALLY FINANCIAL": {
+                    "TransUnion": {
+                        "Account #": "228300XXXXXX",
+                        "Account Type": "Installment account",
+                        "Account Type - Detail": "Installment account",
+                        "Bureau Code": "Individual account",
+                        "Account Status": "Open",
+                        "Monthly Payment": "$726.00",
+                        "Date Opened": "09\/15\/2023",
+                        "Balance": "$21,383.00",
+                        "No. of Months (terms)": "Monthly",
+                        "High Credit": "$32,588.00",
+                        "Credit Limit": "$0.00",
+                        "Past Due": "$0.00",
+                        "Payment Status": "Paid or paying as agreed",
+                        "Last Reported": "10\/30\/2026",
+                        "Comments": "Dispute resolved; customer disagrees",
+                        "Date Last Active": "10\/30\/2026",
+                        "Date of Last Payment": "10\/30\/2026",
+                        "Late Payment Status": "Was 30 days late 6 time(s). Was 60 days late 4 time(s).",
+                        "negativeStatus": "negative",
+                        "previousStatus": null,
+                        "Times 30\/60\/90 Days Late": "6\/4\/0",
+                        "previousImportStatus": null,
+                        "selectedStatus": 2,
+                        "selectedReason": null,
+                        "selectedInstruction": null
+                    },
+                    "Experian": {
+                        "Account #": "228300XXXXXX",
+                        "Account Type": "INSTALLMENT",
+                        "Account Type - Detail": "Auto Loan",
+                        "Bureau Code": "Individual",
+                        "Account Status": "Open",
+                        "Monthly Payment": "$726.00",
+                        "Date Opened": "09\/15\/2023",
+                        "Balance": "$21,383.00",
+                        "No. of Months (terms)": "75 Months",
+                        "High Credit": "$32,588.00",
+                        "Credit Limit": "-",
+                        "Past Due": "-",
+                        "Payment Status": "Current, was past due 60 days",
+                        "Last Reported": "10\/30\/2026",
+                        "Comments": "Completed investigation of FCRA dispute \u2014 consumer disagrees",
+                        "Date Last Active": "02\/01\/2026",
+                        "Date of Last Payment": "10\/30\/2026",
+                        "Late Payment Status": "Was 30 days late 6 time(s). Was 60 days late 4 time(s).",
+                        "negativeStatus": "negative",
+                        "previousStatus": null,
+                        "Times 30\/60\/90 Days Late": "6\/4\/0",
+                        "previousImportStatus": null,
+                        "selectedStatus": 2,
+                        "selectedReason": null,
+                        "selectedInstruction": null
+                    },
+                    "Equifax": {
+                        "Account #": "228300XXXXXX",
+                        "Account Type": "Installment",
+                        "Account Type - Detail": "Installment",
+                        "Bureau Code": "Individual Account",
+                        "Account Status": "Open",
+                        "Monthly Payment": "$726.00",
+                        "Date Opened": "09\/15\/2023",
+                        "Balance": "$21,383.00",
+                        "No. of Months (terms)": "Monthly (due every month)",
+                        "High Credit": "$32,588.00",
+                        "Credit Limit": "-",
+                        "Past Due": "-",
+                        "Payment Status": "Pays account as agreed",
+                        "Last Reported": "10\/30\/2026",
+                        "Comments": "FIXED RATE",
+                        "Date Last Active": "10\/30\/2026",
+                        "Date of Last Payment": "10\/01\/2026",
+                        "Late Payment Status": "Was 30 days late 4 time(s).",
+                        "negativeStatus": "negative",
+                        "previousStatus": null,
+                        "Times 30\/60\/90 Days Late": "4\/0\/0",
+                        "previousImportStatus": null,
+                        "selectedStatus": 2,
+                        "selectedReason": null,
+                        "selectedInstruction": null
+                    }
+                }
+            },
+            {
+                "CBNA": {
+                    "TransUnion": {
+                        "Account #": "426937XXXXXX",
+                        "Account Type": "Revolving account",
+                        "Account Type - Detail": "Revolving account",
+                        "Bureau Code": "Individual account",
+                        "Account Status": "Closed",
+                        "Monthly Payment": "$0.00",
+                        "Date Opened": "10\/22\/2023",
+                        "Balance": "$0.00",
+                        "No. of Months (terms)": "-",
+                        "High Credit": "$629.00",
+                        "Credit Limit": "$250.00",
+                        "Past Due": "$0.00",
+                        "Payment Status": "Paid or paying as agreed",
+                        "Last Reported": "07\/18\/2025",
+                        "Comments": "Canceled by credit grantor",
+                        "Date Last Active": "07\/18\/2025",
+                        "Date of Last Payment": "10\/03\/2024",
+                        "Late Payment Status": "Was 30 days late 2 time(s). Was 60 days late 1 time(s). Was 90 days late 1 time(s).",
+                        "negativeStatus": "negative",
+                        "previousStatus": null,
+                        "Times 30\/60\/90 Days Late": "2\/1\/1",
+                        "previousImportStatus": null,
+                        "selectedStatus": 2,
+                        "selectedReason": null,
+                        "selectedInstruction": null
+                    },
+                    "Experian": {
+                        "Account #": "-",
+                        "Account Type": "-",
+                        "Account Type - Detail": "-",
+                        "Bureau Code": "-",
+                        "Account Status": "-",
+                        "Monthly Payment": "-",
+                        "Date Opened": "-",
+                        "Balance": "-",
+                        "No. of Months (terms)": "-",
+                        "High Credit": "-",
+                        "Credit Limit": "-",
+                        "Past Due": "-",
+                        "Payment Status": "-",
+                        "Last Reported": "-",
+                        "Comments": null,
+                        "Date Last Active": "-",
+                        "Date of Last Payment": "-",
+                        "Late Payment Status": null,
+                        "negativeStatus": null,
+                        "previousStatus": null,
+                        "Times 30\/60\/90 Days Late": "0\/0\/0",
+                        "previousImportStatus": null,
+                        "selectedStatus": 1,
+                        "selectedReason": null,
+                        "selectedInstruction": null
+                    },
+                    "Equifax": {
+                        "Account #": "-",
+                        "Account Type": "-",
+                        "Account Type - Detail": "-",
+                        "Bureau Code": "-",
+                        "Account Status": "-",
+                        "Monthly Payment": "-",
+                        "Date Opened": "-",
+                        "Balance": "-",
+                        "No. of Months (terms)": "-",
+                        "High Credit": "-",
+                        "Credit Limit": "-",
+                        "Past Due": "-",
+                        "Payment Status": "-",
+                        "Last Reported": "-",
+                        "Comments": null,
+                        "Date Last Active": "-",
+                        "Date of Last Payment": "-",
+                        "Late Payment Status": null,
+                        "negativeStatus": null,
+                        "previousStatus": null,
+                        "Times 30\/60\/90 Days Late": "0\/0\/0",
+                        "previousImportStatus": null,
+                        "selectedStatus": 1,
+                        "selectedReason": null,
+                        "selectedInstruction": null
+                    }
+                }
+            },
+            {
+                "SECURITY FIN": {
+                    "TransUnion": {
+                        "Account #": "3XXXX",
+                        "Account Type": "Installment account",
+                        "Account Type - Detail": "Installment account",
+                        "Bureau Code": "Individual account",
+                        "Account Status": "Closed",
+                        "Monthly Payment": "$0.00",
+                        "Date Opened": "12\/06\/2024",
+                        "Balance": "$0.00",
+                        "No. of Months (terms)": "Monthly",
+                        "High Credit": "$1,070.00",
+                        "Credit Limit": "$0.00",
+                        "Past Due": "$0.00",
+                        "Payment Status": "90 days past due",
+                        "Last Reported": "01\/08\/2026",
+                        "Comments": "Closed",
+                        "Date Last Active": "01\/08\/2026",
+                        "Date of Last Payment": "-",
+                        "Late Payment Status": "Was 30 days late 2 time(s). Was 60 days late 4 time(s). Was 90 days late 2 time(s). Was 120 days late 1 time(s).",
+                        "negativeStatus": "negative",
+                        "previousStatus": null,
+                        "Times 30\/60\/90 Days Late": "2\/4\/2",
+                        "previousImportStatus": null,
+                        "selectedStatus": 2,
+                        "selectedReason": null,
+                        "selectedInstruction": null
+                    },
+                    "Experian": {
+                        "Account #": "-",
+                        "Account Type": "-",
+                        "Account Type - Detail": "-",
+                        "Bureau Code": "-",
+                        "Account Status": "-",
+                        "Monthly Payment": "-",
+                        "Date Opened": "-",
+                        "Balance": "-",
+                        "No. of Months (terms)": "-",
+                        "High Credit": "-",
+                        "Credit Limit": "-",
+                        "Past Due": "-",
+                        "Payment Status": "-",
+                        "Last Reported": "-",
+                        "Comments": null,
+                        "Date Last Active": "-",
+                        "Date of Last Payment": "-",
+                        "Late Payment Status": null,
+                        "negativeStatus": null,
+                        "previousStatus": null,
+                        "Times 30\/60\/90 Days Late": "0\/0\/0",
+                        "previousImportStatus": null,
+                        "selectedStatus": 1,
+                        "selectedReason": null,
+                        "selectedInstruction": null
+                    },
+                    "Equifax": {
+                        "Account #": "-",
+                        "Account Type": "-",
+                        "Account Type - Detail": "-",
+                        "Bureau Code": "-",
+                        "Account Status": "-",
+                        "Monthly Payment": "-",
+                        "Date Opened": "-",
+                        "Balance": "-",
+                        "No. of Months (terms)": "-",
+                        "High Credit": "-",
+                        "Credit Limit": "-",
+                        "Past Due": "-",
+                        "Payment Status": "-",
+                        "Last Reported": "-",
+                        "Comments": null,
+                        "Date Last Active": "-",
+                        "Date of Last Payment": "-",
+                        "Late Payment Status": null,
+                        "negativeStatus": null,
+                        "previousStatus": null,
+                        "Times 30\/60\/90 Days Late": "0\/0\/0",
+                        "previousImportStatus": null,
+                        "selectedStatus": 1,
+                        "selectedReason": null,
+                        "selectedInstruction": null
+                    }
+                }
+            },
+            {
+                "SECURITY FINANCE": {
+                    "TransUnion": {
+                        "Account #": "-",
+                        "Account Type": "-",
+                        "Account Type - Detail": "-",
+                        "Bureau Code": "-",
+                        "Account Status": "-",
+                        "Monthly Payment": "-",
+                        "Date Opened": "-",
+                        "Balance": "-",
+                        "No. of Months (terms)": "-",
+                        "High Credit": "-",
+                        "Credit Limit": "-",
+                        "Past Due": "-",
+                        "Payment Status": "-",
+                        "Last Reported": "-",
+                        "Comments": null,
+                        "Date Last Active": "-",
+                        "Date of Last Payment": "-",
+                        "Late Payment Status": null,
+                        "negativeStatus": null,
+                        "previousStatus": null,
+                        "Times 30\/60\/90 Days Late": "0\/0\/0",
+                        "previousImportStatus": null,
+                        "selectedStatus": 1,
+                        "selectedReason": null,
+                        "selectedInstruction": null
+                    },
+                    "Experian": {
+                        "Account #": "-",
+                        "Account Type": "-",
+                        "Account Type - Detail": "-",
+                        "Bureau Code": "-",
+                        "Account Status": "-",
+                        "Monthly Payment": "-",
+                        "Date Opened": "-",
+                        "Balance": "-",
+                        "No. of Months (terms)": "-",
+                        "High Credit": "-",
+                        "Credit Limit": "-",
+                        "Past Due": "-",
+                        "Payment Status": "-",
+                        "Last Reported": "-",
+                        "Comments": null,
+                        "Date Last Active": "-",
+                        "Date of Last Payment": "-",
+                        "Late Payment Status": null,
+                        "negativeStatus": null,
+                        "previousStatus": null,
+                        "Times 30\/60\/90 Days Late": "0\/0\/0",
+                        "previousImportStatus": null,
+                        "selectedStatus": 1,
+                        "selectedReason": null,
+                        "selectedInstruction": null
+                    },
+                    "Equifax": {
+                        "Account #": "1612-3XXXX",
+                        "Account Type": "Installment",
+                        "Account Type - Detail": "Installment",
+                        "Bureau Code": "Individual Account",
+                        "Account Status": "Closed",
+                        "Monthly Payment": "-",
+                        "Date Opened": "12\/06\/2024",
+                        "Balance": "$0.00",
+                        "No. of Months (terms)": "Monthly (due every month)",
+                        "High Credit": "$1,070.00",
+                        "Credit Limit": "-",
+                        "Past Due": "-",
+                        "Payment Status": "not more than four payments past due",
+                        "Last Reported": "01\/31\/2026",
+                        "Comments": "FIXED RATE",
+                        "Date Last Active": "01\/31\/2026",
+                        "Date of Last Payment": "01\/01\/2026",
+                        "Late Payment Status": "Was 30 days late 2 time(s). Was 60 days late 4 time(s). Was 90 days late 2 time(s). Was 120 days late 1 time(s).",
+                        "negativeStatus": "negative",
+                        "previousStatus": null,
+                        "Times 30\/60\/90 Days Late": "2\/4\/2",
+                        "previousImportStatus": null,
+                        "selectedStatus": 2,
+                        "selectedReason": null,
+                        "selectedInstruction": null
+                    }
+                }
+            },
+            {
+                "SECURITY FINANCE": {
+                    "TransUnion": {
+                        "Account #": "-",
+                        "Account Type": "-",
+                        "Account Type - Detail": "-",
+                        "Bureau Code": "-",
+                        "Account Status": "-",
+                        "Monthly Payment": "-",
+                        "Date Opened": "-",
+                        "Balance": "-",
+                        "No. of Months (terms)": "-",
+                        "High Credit": "-",
+                        "Credit Limit": "-",
+                        "Past Due": "-",
+                        "Payment Status": "-",
+                        "Last Reported": "-",
+                        "Comments": null,
+                        "Date Last Active": "-",
+                        "Date of Last Payment": "-",
+                        "Late Payment Status": null,
+                        "negativeStatus": null,
+                        "previousStatus": null,
+                        "Times 30\/60\/90 Days Late": "0\/0\/0",
+                        "previousImportStatus": null,
+                        "selectedStatus": 1,
+                        "selectedReason": null,
+                        "selectedInstruction": null
+                    },
+                    "Experian": {
+                        "Account #": "-",
+                        "Account Type": "-",
+                        "Account Type - Detail": "-",
+                        "Bureau Code": "-",
+                        "Account Status": "-",
+                        "Monthly Payment": "-",
+                        "Date Opened": "-",
+                        "Balance": "-",
+                        "No. of Months (terms)": "-",
+                        "High Credit": "-",
+                        "Credit Limit": "-",
+                        "Past Due": "-",
+                        "Payment Status": "-",
+                        "Last Reported": "-",
+                        "Comments": null,
+                        "Date Last Active": "-",
+                        "Date of Last Payment": "-",
+                        "Late Payment Status": null,
+                        "negativeStatus": null,
+                        "previousStatus": null,
+                        "Times 30\/60\/90 Days Late": "0\/0\/0",
+                        "previousImportStatus": null,
+                        "selectedStatus": 1,
+                        "selectedReason": null,
+                        "selectedInstruction": null
+                    },
+                    "Equifax": {
+                        "Account #": "1612-3XXXX",
+                        "Account Type": "Installment",
+                        "Account Type - Detail": "Installment",
+                        "Bureau Code": "Individual Account",
+                        "Account Status": "Open",
+                        "Monthly Payment": "$115.00",
+                        "Date Opened": "07\/30\/2026",
+                        "Balance": "$397.00",
+                        "No. of Months (terms)": "Monthly (due every month)",
+                        "High Credit": "$698.00",
+                        "Credit Limit": "-",
+                        "Past Due": "-",
+                        "Payment Status": "Pays account as agreed",
+                        "Last Reported": "09\/30\/2026",
+                        "Comments": "FIXED RATE",
+                        "Date Last Active": "09\/30\/2026",
+                        "Date of Last Payment": "09\/01\/2026",
+                        "Late Payment Status": null,
+                        "negativeStatus": "positive",
+                        "previousStatus": null,
+                        "Times 30\/60\/90 Days Late": "0\/0\/0",
+                        "previousImportStatus": null,
+                        "selectedStatus": 1,
+                        "selectedReason": null,
+                        "selectedInstruction": null
+                    }
+                }
+            },
+            {
+                "AFFIRM INC": {
+                    "TransUnion": {
+                        "Account #": "-",
+                        "Account Type": "-",
+                        "Account Type - Detail": "-",
+                        "Bureau Code": "-",
+                        "Account Status": "-",
+                        "Monthly Payment": "-",
+                        "Date Opened": "-",
+                        "Balance": "-",
+                        "No. of Months (terms)": "-",
+                        "High Credit": "-",
+                        "Credit Limit": "-",
+                        "Past Due": "-",
+                        "Payment Status": "-",
+                        "Last Reported": "-",
+                        "Comments": null,
+                        "Date Last Active": "-",
+                        "Date of Last Payment": "-",
+                        "Late Payment Status": null,
+                        "negativeStatus": null,
+                        "previousStatus": null,
+                        "Times 30\/60\/90 Days Late": "0\/0\/0",
+                        "previousImportStatus": null,
+                        "selectedStatus": 1,
+                        "selectedReason": null,
+                        "selectedInstruction": null
+                    },
+                    "Experian": {
+                        "Account #": "WHN72MX",
+                        "Account Type": "INSTALLMENT",
+                        "Account Type - Detail": "Unsecured Loan",
+                        "Bureau Code": "Individual",
+                        "Account Status": "Closed",
+                        "Monthly Payment": "-",
+                        "Date Opened": "12\/23\/2024",
+                        "Balance": "-",
+                        "No. of Months (terms)": "3 Months",
+                        "High Credit": "$122.00",
+                        "Credit Limit": "-",
+                        "Past Due": "-",
+                        "Payment Status": "Paid satisfactorily",
+                        "Last Reported": "02\/26\/2025",
+                        "Comments": "-",
+                        "Date Last Active": "02\/01\/2025",
+                        "Date of Last Payment": "02\/26\/2025",
+                        "Late Payment Status": null,
+                        "negativeStatus": "positive",
+                        "previousStatus": null,
+                        "Times 30\/60\/90 Days Late": "0\/0\/0",
+                        "previousImportStatus": null,
+                        "selectedStatus": 1,
+                        "selectedReason": null,
+                        "selectedInstruction": null
+                    },
+                    "Equifax": {
+                        "Account #": "-",
+                        "Account Type": "-",
+                        "Account Type - Detail": "-",
+                        "Bureau Code": "-",
+                        "Account Status": "-",
+                        "Monthly Payment": "-",
+                        "Date Opened": "-",
+                        "Balance": "-",
+                        "No. of Months (terms)": "-",
+                        "High Credit": "-",
+                        "Credit Limit": "-",
+                        "Past Due": "-",
+                        "Payment Status": "-",
+                        "Last Reported": "-",
+                        "Comments": null,
+                        "Date Last Active": "-",
+                        "Date of Last Payment": "-",
+                        "Late Payment Status": null,
+                        "negativeStatus": null,
+                        "previousStatus": null,
+                        "Times 30\/60\/90 Days Late": "0\/0\/0",
+                        "previousImportStatus": null,
+                        "selectedStatus": 1,
+                        "selectedReason": null,
+                        "selectedInstruction": null
+                    }
+                }
+            },
+            {
+                "SECURITY FIN": {
+                    "TransUnion": {
+                        "Account #": "3XXXX",
+                        "Account Type": "Installment account",
+                        "Account Type - Detail": "Installment account",
+                        "Bureau Code": "Individual account",
+                        "Account Status": "Closed",
+                        "Monthly Payment": "$0.00",
+                        "Date Opened": "07\/30\/2026",
+                        "Balance": "$0.00",
+                        "No. of Months (terms)": "Monthly",
+                        "High Credit": "$698.00",
+                        "Credit Limit": "$0.00",
+                        "Past Due": "$0.00",
+                        "Payment Status": "Paid or paying as agreed",
+                        "Last Reported": "10\/30\/2026",
+                        "Comments": "Closed",
+                        "Date Last Active": "10\/30\/2026",
+                        "Date of Last Payment": "10\/30\/2026",
+                        "Late Payment Status": null,
+                        "negativeStatus": "positive",
+                        "previousStatus": null,
+                        "Times 30\/60\/90 Days Late": "0\/0\/0",
+                        "previousImportStatus": null,
+                        "selectedStatus": 1,
+                        "selectedReason": null,
+                        "selectedInstruction": null
+                    },
+                    "Experian": {
+                        "Account #": "-",
+                        "Account Type": "-",
+                        "Account Type - Detail": "-",
+                        "Bureau Code": "-",
+                        "Account Status": "-",
+                        "Monthly Payment": "-",
+                        "Date Opened": "-",
+                        "Balance": "-",
+                        "No. of Months (terms)": "-",
+                        "High Credit": "-",
+                        "Credit Limit": "-",
+                        "Past Due": "-",
+                        "Payment Status": "-",
+                        "Last Reported": "-",
+                        "Comments": null,
+                        "Date Last Active": "-",
+                        "Date of Last Payment": "-",
+                        "Late Payment Status": null,
+                        "negativeStatus": null,
+                        "previousStatus": null,
+                        "Times 30\/60\/90 Days Late": "0\/0\/0",
+                        "previousImportStatus": null,
+                        "selectedStatus": 1,
+                        "selectedReason": null,
+                        "selectedInstruction": null
+                    },
+                    "Equifax": {
+                        "Account #": "-",
+                        "Account Type": "-",
+                        "Account Type - Detail": "-",
+                        "Bureau Code": "-",
+                        "Account Status": "-",
+                        "Monthly Payment": "-",
+                        "Date Opened": "-",
+                        "Balance": "-",
+                        "No. of Months (terms)": "-",
+                        "High Credit": "-",
+                        "Credit Limit": "-",
+                        "Past Due": "-",
+                        "Payment Status": "-",
+                        "Last Reported": "-",
+                        "Comments": null,
+                        "Date Last Active": "-",
+                        "Date of Last Payment": "-",
+                        "Late Payment Status": null,
+                        "negativeStatus": null,
+                        "previousStatus": null,
+                        "Times 30\/60\/90 Days Late": "0\/0\/0",
+                        "previousImportStatus": null,
+                        "selectedStatus": 1,
+                        "selectedReason": null,
+                        "selectedInstruction": null
+                    }
+                }
+            },
+            {
+                "SECURITY FIN": {
+                    "TransUnion": {
+                        "Account #": "3XXXX",
+                        "Account Type": "Installment account",
+                        "Account Type - Detail": "Installment account",
+                        "Bureau Code": "Individual account",
+                        "Account Status": "Closed",
+                        "Monthly Payment": "$0.00",
+                        "Date Opened": "11\/01\/2024",
+                        "Balance": "$0.00",
+                        "No. of Months (terms)": "Monthly",
+                        "High Credit": "$660.00",
+                        "Credit Limit": "$0.00",
+                        "Past Due": "$0.00",
+                        "Payment Status": "Paid or paying as agreed",
+                        "Last Reported": "11\/08\/2024",
+                        "Comments": "Closed",
+                        "Date Last Active": "11\/08\/2024",
+                        "Date of Last Payment": "-",
+                        "Late Payment Status": null,
+                        "negativeStatus": "positive",
+                        "previousStatus": null,
+                        "Times 30\/60\/90 Days Late": "0\/0\/0",
+                        "previousImportStatus": null,
+                        "selectedStatus": 1,
+                        "selectedReason": null,
+                        "selectedInstruction": null
+                    },
+                    "Experian": {
+                        "Account #": "-",
+                        "Account Type": "-",
+                        "Account Type - Detail": "-",
+                        "Bureau Code": "-",
+                        "Account Status": "-",
+                        "Monthly Payment": "-",
+                        "Date Opened": "-",
+                        "Balance": "-",
+                        "No. of Months (terms)": "-",
+                        "High Credit": "-",
+                        "Credit Limit": "-",
+                        "Past Due": "-",
+                        "Payment Status": "-",
+                        "Last Reported": "-",
+                        "Comments": null,
+                        "Date Last Active": "-",
+                        "Date of Last Payment": "-",
+                        "Late Payment Status": null,
+                        "negativeStatus": null,
+                        "previousStatus": null,
+                        "Times 30\/60\/90 Days Late": "0\/0\/0",
+                        "previousImportStatus": null,
+                        "selectedStatus": 1,
+                        "selectedReason": null,
+                        "selectedInstruction": null
+                    },
+                    "Equifax": {
+                        "Account #": "-",
+                        "Account Type": "-",
+                        "Account Type - Detail": "-",
+                        "Bureau Code": "-",
+                        "Account Status": "-",
+                        "Monthly Payment": "-",
+                        "Date Opened": "-",
+                        "Balance": "-",
+                        "No. of Months (terms)": "-",
+                        "High Credit": "-",
+                        "Credit Limit": "-",
+                        "Past Due": "-",
+                        "Payment Status": "-",
+                        "Last Reported": "-",
+                        "Comments": null,
+                        "Date Last Active": "-",
+                        "Date of Last Payment": "-",
+                        "Late Payment Status": null,
+                        "negativeStatus": null,
+                        "previousStatus": null,
+                        "Times 30\/60\/90 Days Late": "0\/0\/0",
+                        "previousImportStatus": null,
+                        "selectedStatus": 1,
+                        "selectedReason": null,
+                        "selectedInstruction": null
+                    }
+                }
+            },
+            {
+                "SECURITY FINANCE": {
+                    "TransUnion": {
+                        "Account #": "-",
+                        "Account Type": "-",
+                        "Account Type - Detail": "-",
+                        "Bureau Code": "-",
+                        "Account Status": "-",
+                        "Monthly Payment": "-",
+                        "Date Opened": "-",
+                        "Balance": "-",
+                        "No. of Months (terms)": "-",
+                        "High Credit": "-",
+                        "Credit Limit": "-",
+                        "Past Due": "-",
+                        "Payment Status": "-",
+                        "Last Reported": "-",
+                        "Comments": null,
+                        "Date Last Active": "-",
+                        "Date of Last Payment": "-",
+                        "Late Payment Status": null,
+                        "negativeStatus": null,
+                        "previousStatus": null,
+                        "Times 30\/60\/90 Days Late": "0\/0\/0",
+                        "previousImportStatus": null,
+                        "selectedStatus": 1,
+                        "selectedReason": null,
+                        "selectedInstruction": null
+                    },
+                    "Experian": {
+                        "Account #": "-",
+                        "Account Type": "-",
+                        "Account Type - Detail": "-",
+                        "Bureau Code": "-",
+                        "Account Status": "-",
+                        "Monthly Payment": "-",
+                        "Date Opened": "-",
+                        "Balance": "-",
+                        "No. of Months (terms)": "-",
+                        "High Credit": "-",
+                        "Credit Limit": "-",
+                        "Past Due": "-",
+                        "Payment Status": "-",
+                        "Last Reported": "-",
+                        "Comments": null,
+                        "Date Last Active": "-",
+                        "Date of Last Payment": "-",
+                        "Late Payment Status": null,
+                        "negativeStatus": null,
+                        "previousStatus": null,
+                        "Times 30\/60\/90 Days Late": "0\/0\/0",
+                        "previousImportStatus": null,
+                        "selectedStatus": 1,
+                        "selectedReason": null,
+                        "selectedInstruction": null
+                    },
+                    "Equifax": {
+                        "Account #": "1612-3XXXX",
+                        "Account Type": "Installment",
+                        "Account Type - Detail": "Installment",
+                        "Bureau Code": "Individual Account",
+                        "Account Status": "Closed",
+                        "Monthly Payment": "-",
+                        "Date Opened": "11\/01\/2024",
+                        "Balance": "$0.00",
+                        "No. of Months (terms)": "Monthly (due every month)",
+                        "High Credit": "$660.00",
+                        "Credit Limit": "-",
+                        "Past Due": "-",
+                        "Payment Status": "Pays account as agreed",
+                        "Last Reported": "11\/30\/2024",
+                        "Comments": "FIXED RATE",
+                        "Date Last Active": "11\/30\/2024",
+                        "Date of Last Payment": "11\/01\/2024",
+                        "Late Payment Status": null,
+                        "negativeStatus": "positive",
+                        "previousStatus": null,
+                        "Times 30\/60\/90 Days Late": "0\/0\/0",
+                        "previousImportStatus": null,
+                        "selectedStatus": 1,
+                        "selectedReason": null,
+                        "selectedInstruction": null
+                    }
+                }
+            },
+            {
+                "CAPITAL ONE": {
+                    "TransUnion": {
+                        "Account #": "515676XXXXXX",
+                        "Account Type": "Revolving account",
+                        "Account Type - Detail": "Revolving account",
+                        "Bureau Code": "Authorized account",
+                        "Account Status": "Open",
+                        "Monthly Payment": "$25.00",
+                        "Date Opened": "06\/03\/2022",
+                        "Balance": "$784.00",
+                        "No. of Months (terms)": "-",
+                        "High Credit": "$5,342.00",
+                        "Credit Limit": "$4,250.00",
+                        "Past Due": "$0.00",
+                        "Payment Status": "Paid or paying as agreed",
+                        "Last Reported": "11\/02\/2026",
+                        "Comments": "-",
+                        "Date Last Active": "11\/02\/2026",
+                        "Date of Last Payment": "10\/22\/2026",
+                        "Late Payment Status": null,
+                        "negativeStatus": "positive",
+                        "previousStatus": null,
+                        "Times 30\/60\/90 Days Late": "0\/0\/0",
+                        "previousImportStatus": null,
+                        "selectedStatus": 1,
+                        "selectedReason": null,
+                        "selectedInstruction": null
+                    },
+                    "Experian": {
+                        "Account #": "515676XXXXXX",
+                        "Account Type": "REVOLVING",
+                        "Account Type - Detail": "Credit Card",
+                        "Bureau Code": "Authorized User",
+                        "Account Status": "Open",
+                        "Monthly Payment": "$25.00",
+                        "Date Opened": "06\/03\/2022",
+                        "Balance": "$784.00",
+                        "No. of Months (terms)": "Revolving",
+                        "High Credit": "$5,342.00",
+                        "Credit Limit": "$4,250.00",
+                        "Past Due": "-",
+                        "Payment Status": "Current",
+                        "Last Reported": "11\/02\/2026",
+                        "Comments": "-",
+                        "Date Last Active": "11\/01\/2026",
+                        "Date of Last Payment": "10\/22\/2026",
+                        "Late Payment Status": null,
+                        "negativeStatus": "positive",
+                        "previousStatus": null,
+                        "Times 30\/60\/90 Days Late": "0\/0\/0",
+                        "previousImportStatus": null,
+                        "selectedStatus": 1,
+                        "selectedReason": null,
+                        "selectedInstruction": null
+                    },
+                    "Equifax": {
+                        "Account #": "515676XXXXXX",
+                        "Account Type": "Revolving",
+                        "Account Type - Detail": "Revolving",
+                        "Bureau Code": "Authorized User",
+                        "Account Status": "Open",
+                        "Monthly Payment": "$25.00",
+                        "Date Opened": "06\/03\/2022",
+                        "Balance": "$784.00",
+                        "No. of Months (terms)": "Monthly (due every month)",
+                        "High Credit": "$5,342.00",
+                        "Credit Limit": "$4,250.00",
+                        "Past Due": "-",
+                        "Payment Status": "Pays account as agreed",
+                        "Last Reported": "11\/02\/2026",
+                        "Comments": "-",
+                        "Date Last Active": "11\/02\/2026",
+                        "Date of Last Payment": "10\/01\/2026",
+                        "Late Payment Status": null,
+                        "negativeStatus": "positive",
+                        "previousStatus": null,
+                        "Times 30\/60\/90 Days Late": "0\/0\/0",
+                        "previousImportStatus": null,
+                        "selectedStatus": 1,
+                        "selectedReason": null,
+                        "selectedInstruction": null
+                    }
+                }
+            },
+            {
+                "SYNCB\/TJX COS DC": {
+                    "TransUnion": {
+                        "Account #": "524366XXXXXX",
+                        "Account Type": "Revolving account",
+                        "Account Type - Detail": "Revolving account",
+                        "Bureau Code": "Individual account",
+                        "Account Status": "Closed",
+                        "Monthly Payment": "$0.00",
+                        "Date Opened": "10\/22\/2023",
+                        "Balance": "$0.00",
+                        "No. of Months (terms)": "-",
+                        "High Credit": "$335.00",
+                        "Credit Limit": "$300.00",
+                        "Past Due": "$0.00",
+                        "Payment Status": "Paid or paying as agreed",
+                        "Last Reported": "01\/24\/2025",
+                        "Comments": "Canceled by credit grantor",
+                        "Date Last Active": "01\/24\/2025",
+                        "Date of Last Payment": "03\/12\/2024",
+                        "Late Payment Status": null,
+                        "negativeStatus": "positive",
+                        "previousStatus": null,
+                        "Times 30\/60\/90 Days Late": "0\/0\/0",
+                        "previousImportStatus": null,
+                        "selectedStatus": 1,
+                        "selectedReason": null,
+                        "selectedInstruction": null
+                    },
+                    "Experian": {
+                        "Account #": "524366XXXXXX",
+                        "Account Type": "REVOLVING",
+                        "Account Type - Detail": "Credit Card",
+                        "Bureau Code": "Individual",
+                        "Account Status": "Closed",
+                        "Monthly Payment": "-",
+                        "Date Opened": "10\/22\/2023",
+                        "Balance": "-",
+                        "No. of Months (terms)": "Revolving",
+                        "High Credit": "$335.00",
+                        "Credit Limit": "$300.00",
+                        "Past Due": "-",
+                        "Payment Status": "Paid satisfactorily",
+                        "Last Reported": "10\/07\/2024",
+                        "Comments": "-",
+                        "Date Last Active": "10\/01\/2024",
+                        "Date of Last Payment": "03\/12\/2024",
+                        "Late Payment Status": null,
+                        "negativeStatus": "positive",
+                        "previousStatus": null,
+                        "Times 30\/60\/90 Days Late": "0\/0\/0",
+                        "previousImportStatus": null,
+                        "selectedStatus": 1,
+                        "selectedReason": null,
+                        "selectedInstruction": null
+                    },
+                    "Equifax": {
+                        "Account #": "524366XXXXXXXXXX",
+                        "Account Type": "Revolving",
+                        "Account Type - Detail": "Revolving",
+                        "Bureau Code": "Individual Account",
+                        "Account Status": "Closed",
+                        "Monthly Payment": "-",
+                        "Date Opened": "10\/22\/2023",
+                        "Balance": "$0.00",
+                        "No. of Months (terms)": "Monthly (due every month)",
+                        "High Credit": "$335.00",
+                        "Credit Limit": "$300.00",
+                        "Past Due": "-",
+                        "Payment Status": "Pays account as agreed",
+                        "Last Reported": "01\/24\/2025",
+                        "Comments": "ACCOUNT CLOSED BY CREDIT GRANTOR",
+                        "Date Last Active": "01\/24\/2025",
+                        "Date of Last Payment": "03\/01\/2024",
+                        "Late Payment Status": null,
+                        "negativeStatus": "positive",
+                        "previousStatus": null,
+                        "Times 30\/60\/90 Days Late": "0\/0\/0",
+                        "previousImportStatus": null,
+                        "selectedStatus": 1,
+                        "selectedReason": null,
+                        "selectedInstruction": null
+                    }
+                }
+            }
+        ],
+        "personal_info": {
+            "TransUnion": [
+                {
+                    "Credit Report Date": "11\/16\/2026"
+                },
+                {
+                    "Name": [
+                        {
+                            "name1": "REGINALD LAROCHE",
+                            "isDisputed": 0
+                        }
+                    ]
+                },
+                {
+                    "Also Known As": null,
+                    "isDisputed": 0
+                },
+                {
+                    "Previous Employer(s)": null,
+                    "isDisputed": 0
+                },
+                {
+                    "Date of Birth": "1981",
+                    "isDisputed": 0
+                },
+                {
+                    "Current Address(es)": "1060 COUNTY ROAD QQ 7 WAUPACA, WI 54981 06\/2025",
+                    "isDisputed": 0
+                },
+                {
+                    "Previous Address(es)": [
+                        {
+                            "add1": "1626 SHANDLEY DR OHIO COLUMBUS COLUMBUS, OH 43224 04\/2022",
+                            "isDisputed": 0
+                        },
+                        {
+                            "add2": "1020 COVERED BRIDGE RD 25 WAUPACA, WI 54981 02\/2024",
+                            "isDisputed": 0
+                        }
+                    ]
+                },
+                {
+                    "Employers": [
+                        {
+                            "employer1": "TRADESMEN",
+                            "isDisputed": 0
+                        },
+                        {
+                            "employer2": "WAUPACA FOUNDRY",
+                            "isDisputed": 0
+                        }
+                    ]
+                }
+            ],
+            "Experian": [
+                {
+                    "Credit Report Date": "11\/16\/2026"
+                },
+                {
+                    "Name": [
+                        {
+                            "name1": "REGINALD LAROCHE",
+                            "isDisputed": 0
+                        }
+                    ]
+                },
+                {
+                    "Also Known As": null,
+                    "isDisputed": 0
+                },
+                {
+                    "Previous Employer(s)": null,
+                    "isDisputed": 0
+                },
+                {
+                    "Date of Birth": "1981",
+                    "isDisputed": 0
+                },
+                {
+                    "Current Address(es)": "12763 SW 50TH ST MIRAMAR, FL 33027-5812 11\/2026",
+                    "isDisputed": 0
+                },
+                {
+                    "Previous Address(es)": [
+                        {
+                            "add1": "1020 COVERED BRIDGE RD APT 25 WAUPACA, WI 54981-8131 09\/2026",
+                            "isDisputed": 0
+                        },
+                        {
+                            "add2": "1626 SHANLEY DR COLUMBUS, OH 43224-4864 09\/2026",
+                            "isDisputed": 0
+                        }
+                    ]
+                },
+                {
+                    "Employers": [
+                        {
+                            "employer1": null,
+                            "isDisputed": 0
+                        },
+                        {
+                            "employer2": null,
+                            "isDisputed": 0
+                        }
+                    ]
+                }
+            ],
+            "Equifax": [
+                {
+                    "Credit Report Date": "11\/16\/2026"
+                },
+                {
+                    "Name": [
+                        {
+                            "name1": "REGINALD LAROCHE",
+                            "isDisputed": 0
+                        }
+                    ]
+                },
+                {
+                    "Also Known As": null,
+                    "isDisputed": 0
+                },
+                {
+                    "Previous Employer(s)": null,
+                    "isDisputed": 0
+                },
+                {
+                    "Date of Birth": "1981",
+                    "isDisputed": 0
+                },
+                {
+                    "Current Address(es)": "1060 COUNTY ROAD QQ APT 7 WAUPACA, WI 54981 10\/2026",
+                    "isDisputed": 0
+                },
+                {
+                    "Previous Address(es)": null,
+                    "isDisputed": 0
+                },
+                {
+                    "Employers": [
+                        {
+                            "employer1": "WAUPACA FOUNDERY",
+                            "isDisputed": 0
+                        },
+                        {
+                            "employer2": null,
+                            "isDisputed": 0
+                        }
+                    ]
+                }
+            ]
+        },
+        "inquiries": {
+            "Experian": [
+                {
+                    "0###SEC FIN # 1612||11\/02\/2026||Finance, personal": 0,
+                    "isDisputed": 0,
+                    "isAlreadyDisputed": 0,
+                    "oldDisputeId": 0,
+                    "oldDispburId": 0,
+                    "previousStatus": null,
+                    "previousReason": null,
+                    "previousInstruction": null,
+                    "selectedStatus": null
+                }
+            ],
+            "TransUnion": [
+                {
+                    "0###SEC FIN # 1612||11\/02\/2026||Finance, personal": 1,
+                    "isDisputed": 0,
+                    "isAlreadyDisputed": 0,
+                    "oldDisputeId": 0,
+                    "oldDispburId": 0,
+                    "previousStatus": null,
+                    "previousReason": null,
+                    "previousInstruction": null,
+                    "selectedStatus": null
+                }
+            ],
+            "Equifax": [
+                {
+                    "0###SEC FIN # 1612||11\/02\/2026||Finance, personal": 0,
+                    "isDisputed": 0,
+                    "isAlreadyDisputed": 0,
+                    "oldDisputeId": 0,
+                    "oldDispburId": 0,
+                    "previousStatus": null,
+                    "previousReason": null,
+                    "previousInstruction": null,
+                    "selectedStatus": null
+                }
+            ],
+            "selectedStatus": {
+                "Experian": null,
+                "TransUnion": null,
+                "Equifax": null
+            },
+            "selectedReason": null,
+            "selectedInstruction": null
+        },
+        "public_records": {
+            "Experian": [],
+            "TransUnion": [],
+            "Equifax": []
+        },
+        "credit_summary": {
+            "TransUnion": {
+                "Total Accounts": "7",
+                "Open Accounts": "2",
+                "Closed Accounts": "5",
+                "Delinquent": "3",
+                "Derogatory": "3",
+                "Collection": "-",
+                "Balances": "$22,167.00",
+                "Payments": "$751.00",
+                "Public Records": "-",
+                "Inquiries(2 years)": "1"
+            },
+            "Experian": {
+                "Total Accounts": "4",
+                "Open Accounts": "2",
+                "Closed Accounts": "2",
+                "Delinquent": "1",
+                "Derogatory": "1",
+                "Collection": "-",
+                "Balances": "$22,167.00",
+                "Payments": "$751.00",
+                "Public Records": "-",
+                "Inquiries(2 years)": "-"
+            },
+            "Equifax": {
+                "Total Accounts": "6",
+                "Open Accounts": "3",
+                "Closed Accounts": "3",
+                "Delinquent": "2",
+                "Derogatory": "2",
+                "Collection": "-",
+                "Balances": "$22,564.00",
+                "Payments": "$866.00",
+                "Public Records": "-",
+                "Inquiries(2 years)": "-"
+            }
+        },
+        "raw_html_data": null,
+        "raw_json_data": null,
+        "report_date": "2026-11-16",
+        "simple_audit_data": {
+            "simple_audit_account_summary": {
+                "simple_audit_AH_cnt": 6,
+                "simple_audit_AH_arr": [
+                    "ALLY FINANCIAL|||15\/09\/2023|||15\/09\/2023|||15\/09\/2023|||Was 30 days late 6 time(s). Was 60 days late 4 time(s).,Was 30 days late 4 time(s).,30 days late,60 days late,past due",
+                    "CBNA|||0|||0|||22\/10\/2023|||Was 30 days late 2 time(s). Was 60 days late 1 time(s). Was 90 days late 1 time(s).,30 days late,60 days late,90 days late",
+                    "SECURITY FIN|||0|||0|||06\/12\/2024|||Was 30 days late 2 time(s). Was 60 days late 4 time(s). Was 90 days late 2 time(s). Was 120 days late 1 time(s).,30 days late,60 days late,90 days late,120 days late,past due",
+                    "SECURITY FINANCE|||06\/12\/2024|||0|||0|||Was 30 days late 2 time(s). Was 60 days late 4 time(s). Was 90 days late 2 time(s). Was 120 days late 1 time(s).,30 days late,60 days late,90 days late,120 days late,past due"
+                ],
+                "simple_audit_credit_limit_ex_cnt": 1,
+                "simple_audit_credit_limit_tr_cnt": 1,
+                "simple_audit_credit_limit_eq_cnt": 1,
+                "simple_audit_credit_limit_ex": 4250,
+                "simple_audit_credit_limit_tr": 4250,
+                "simple_audit_credit_limit_eq": 4250,
+                "simple_audit_balance_ex": 784,
+                "simple_audit_balance_tr": 784,
+                "simple_audit_balance_eq": 784
+            },
+            "simple_audit_public_records": {
+                "simple_audit_PR_arr": [],
+                "simple_audit_PR_cnt": 0
+            },
+            "simple_audit_credit_inquiries": {
+                "simple_audit_CI_arr": [
+                    "SEC FIN # 1612|||0|||0|||11\/02\/2026|||Inquiry"
+                ],
+                "simple_audit_CI_cnt": 1
+            }
+        },
+        "source_provider": "MyScoreIQ",
+        "reimport_summary": null,
+        "first_import_summary": {
+            "credit_utilization_by_bureau": {
+                "TransUnion": {
+                    "total_credit_limit": 4250,
+                    "total_balance": 784,
+                    "available_credit": 3466,
+                    "utilization": 18.45,
+                    "account_count": 1
+                },
+                "Experian": {
+                    "total_credit_limit": 4250,
+                    "total_balance": 784,
+                    "available_credit": 3466,
+                    "utilization": 18.45,
+                    "account_count": 1
+                },
+                "Equifax": {
+                    "total_credit_limit": 4250,
+                    "total_balance": 784,
+                    "available_credit": 3466,
+                    "utilization": 18.45,
+                    "account_count": 1
+                }
+            },
+            "current_credit_utilization": 18.45,
+            "starting_credit_utilization": 18.45,
+            "prior_credit_utilization": null,
+            "credit_health_indicators": {
+                "on_time_payments": {
+                    "on_time": 186,
+                    "scored": 218,
+                    "percentage": 85.3,
+                    "label": "186 of 218 (85.3%)",
+                    "precision": "derived",
+                    "window_months": 24
+                },
+                "total_open_accounts": {
+                    "value": 3,
+                    "by_bureau": {
+                        "TransUnion": 2,
+                        "Experian": 2,
+                        "Equifax": 3
+                    }
+                },
+                "hard_inquiries": {
+                    "value": 1,
+                    "by_bureau": {
+                        "TransUnion": 1,
+                        "Experian": 0,
+                        "Equifax": 0
+                    }
+                },
+                "derogatory_items": {
+                    "value": 3,
+                    "by_bureau": {
+                        "TransUnion": 3,
+                        "Experian": 1,
+                        "Equifax": 2
+                    }
+                },
+                "avg_account_age": {
+                    "months": 26,
+                    "years": 2,
+                    "months_part": 2,
+                    "label": "2 years 2 months",
+                    "accounts_counted": 11
+                }
+            }
+        },
+        "request_id": null,
+        "personal_info_disputed": []
+    },
+    "pendingReportId": 175,
+    "clientId": 146,
+    "regId": 1003476,
+    "teamId": 1,
+    "isPendingReport": "yes",
+    "reportProvider": "MyScoreIQ",
+    "isReportImportedPreviously": 0,
+    "clientChoice": 0,
+    "reportDate": null,
+    "savedOn": "2026-11-16",
+    "sourceProvider": "MyScoreIQ"
+}
